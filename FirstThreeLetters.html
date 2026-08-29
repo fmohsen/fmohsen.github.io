@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>تعلّم الحروف العربية - أ ب ت مع الصوت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fef5e7, #f0e6d2);
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+            padding: 20px 16px 45px;
+            min-height: 100vh;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(115deg, #8B5A2B, #6B3E1A);
+            padding: 20px;
+            border-radius: 70px 70px 45px 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.25);
+            border: 3px solid #FFE0A3;
+            position: relative;
+            min-height: 130px;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background: #c5e0d4;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 3px 3px 0 #4a2a0e;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #FFF2CC;
+            background: #a05e2cb3;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 60px;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .sound-indicator {
+            background: #2a8a7a;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-family: 'Tajawal';
+            margin-top: 5px;
+        }
+
+        .sound-indicator i {
+            margin-left: 5px;
+        }
+
+        .intro-section {
+            background: white;
+            border-radius: 55px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            border: 2px solid #efd7ae;
+            text-align: center;
+        }
+
+        .intro-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #8B5A2B;
+            margin-bottom: 15px;
+        }
+
+        .letters-intro {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .letter-intro-box {
+            background: #FFFDF7;
+            border-radius: 40px;
+            padding: 15px 25px;
+            border: 3px solid #FFE0A3;
+            text-align: center;
+            min-width: 100px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .letter-intro-box:hover {
+            transform: scale(1.05);
+            border-color: #FFB347;
+        }
+
+        .letter-intro-box:active {
+            transform: scale(0.95);
+        }
+
+        .letter-intro-box .big-letter {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #8B5A2B;
+        }
+
+        .letter-intro-box .letter-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #5D4037;
+            margin-top: 5px;
+        }
+
+        .letter-intro-box .letter-images {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .letter-intro-box .letter-images span {
+            font-size: 2rem;
+        }
+
+        .letter-intro-box .sound-icon {
+            color: #1e6b5e;
+            font-size: 1.2rem;
+            margin-top: 8px;
+        }
+
+        .start-btn {
+            background: #1e6b5e;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            font-family: 'Tajawal';
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 5px 0 #0f5c4f;
+            margin-top: 15px;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.03);
+            background: #2a8a7a;
+        }
+
+        .start-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #0f5c4f;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 55px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            border: 2px solid #efd7ae;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            display: none;
+        }
+
+        .quiz-container.active {
+            display: block;
+        }
+
+        .question-area {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .question-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #6B3E00;
+            background: #FFF8E1;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 60px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 3px solid transparent;
+        }
+
+        .question-text:hover {
+            border-color: #FFB347;
+            transform: scale(1.02);
+        }
+
+        .question-text:active {
+            transform: scale(0.98);
+        }
+
+        .question-highlight {
+            background: #FFE08C;
+            padding: 4px 15px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        .question-sound-icon {
+            color: #1e6b5e;
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .options-area {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: #FFFDF7;
+            border: 4px solid #e0e8e0;
+            border-radius: 60px;
+            padding: 20px 35px;
+            font-size: 4rem;
+            font-weight: 900;
+            font-family: 'Tajawal';
+            color: #8B5A2B;
+            cursor: pointer;
+            transition: 0.2s;
+            min-width: 120px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .option-btn:hover {
+            transform: scale(1.05);
+            border-color: #FFB347;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .option-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .option-btn.correct-answer {
+            border-color: #2E7D32;
+            background: #D4EDC9;
+            box-shadow: 0 0 0 3px #2E7D32;
+        }
+
+        .option-btn.wrong-answer {
+            border-color: #C62828;
+            background: #FFE0D4;
+            box-shadow: 0 0 0 3px #C62828;
+        }
+
+        .feedback-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .feedback-correct {
+            background: #D4EDC9;
+            color: #1E5E1E;
+        }
+
+        .feedback-wrong {
+            background: #FFE0D4;
+            color: #B13E3E;
+        }
+
+        .next-btn {
+            background: #8B5A2B;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            font-family: 'Tajawal';
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 0 #5A3A1A;
+            margin-top: 10px;
+        }
+
+        .next-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .next-btn:hover:not(:disabled) {
+            transform: scale(1.03);
+            background: #A5703E;
+        }
+
+        .progress-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: #FDF5E6;
+            padding: 12px 20px;
+            border-radius: 80px;
+            margin-bottom: 25px;
+        }
+
+        .progress-text {
+            font-weight: 700;
+            background: #FFF3E0;
+            padding: 5px 20px;
+            border-radius: 40px;
+            color: #5D4037;
+        }
+
+        .reset-btn {
+            background: #FFCD94;
+            border: none;
+            border-radius: 60px;
+            padding: 8px 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            font-family: 'Tajawal';
+            color: #5D4037;
+        }
+
+        .reset-btn:hover {
+            background: #FFB86B;
+            transform: scale(1.02);
+        }
+
+        .final-result {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .confetti {
+            font-size: 3rem;
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #5D4037;
+            font-weight: 700;
+        }
+
+        .celebrate {
+            animation: celebrateAnim 0.4s ease;
+        }
+
+        @keyframes celebrateAnim {
+            0% { transform: scale(1); background: #FFFDE7; }
+            50% { transform: scale(1.02); background: #FFF9C4; }
+            100% { transform: scale(1); background: transparent; }
+        }
+
+        @media (max-width: 600px) {
+            .option-btn {
+                font-size: 3rem;
+                padding: 15px 25px;
+                min-width: 90px;
+            }
+            .letter-intro-box .big-letter {
+                font-size: 3rem;
+            }
+            .hero-image-container {
+                width: 60px;
+                height: 60px;
+                left: 10px;
+            }
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+            .question-text {
+                font-size: 1.4rem;
+            }
+            .letters-intro {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-image-container">
+        <img src="child.jpg" alt="صورة الطفل" id="heroImage" onerror="this.style.display='none'; document.getElementById('heroImageContainer').style.display='none'">
+    </div>
+    <h1>🔤 تَعَلَّمْ الْحُرُوفَ 🔤</h1>
+    <p>أ - ب - ت</p>
+    <div style="margin-top:5px;">
+        <button class="sound-indicator" onclick="testSound()"><i class="fas fa-volume-up"></i> اختبار الصوت</button>
+    </div>
+</div>
+
+<!-- ===== قسم التعريف بالحروف ===== -->
+<div class="intro-section" id="introSection">
+    <div class="intro-title">👋 تَعَالَ نَتَعَرَّفُ عَلَى الْحُرُوفِ الثَّلَاثَةِ</div>
+    <div class="letters-intro">
+        <div class="letter-intro-box" onclick="playAudio('alif')" data-letter="أ">
+            <div class="big-letter">أ</div>
+            <div class="letter-name">أَلِف</div>
+            <div class="letter-images">
+                <span>🐇</span>
+                <span>🦁</span>
+            </div>
+            <div class="sound-icon"><i class="fas fa-volume-up"></i> اِضْغَطْ لِتَسْمَعَ</div>
+        </div>
+        <div class="letter-intro-box" onclick="playAudio('baa')" data-letter="ب">
+            <div class="big-letter">ب</div>
+            <div class="letter-name">بَاء</div>
+            <div class="letter-images">
+                <span>🏠</span>
+                <span>🐄</span>
+            </div>
+            <div class="sound-icon"><i class="fas fa-volume-up"></i> اِضْغَطْ لِتَسْمَعَ</div>
+        </div>
+        <div class="letter-intro-box" onclick="playAudio('taa')" data-letter="ت">
+            <div class="big-letter">ت</div>
+            <div class="letter-name">تَاء</div>
+            <div class="letter-images">
+                <span>🍎</span>
+                <span>🌴</span>
+            </div>
+            <div class="sound-icon"><i class="fas fa-volume-up"></i> اِضْغَطْ لِتَسْمَعَ</div>
+        </div>
+    </div>
+    <button class="start-btn" id="startQuizBtn">🚀 هَيَّا نَبْدَأُ الْلَّعْبَةَ</button>
+</div>
+
+<!-- ===== قسم الاختبار ===== -->
+<div class="quiz-container" id="quizContainer">
+    <div class="progress-area">
+        <div class="progress-text"><i class="fas fa-star" style="color:#FFD700;"></i> السُّؤَالُ: <span id="currentQuestion">١</span> / ٣</div>
+        <button class="reset-btn" id="resetBtn"><i class="fas fa-undo-alt"></i> إِعَادَةُ اللَّعْبَةِ</button>
+    </div>
+
+    <div id="questionContainer"></div>
+</div>
+
+<footer>
+    💡 اِضْغَطْ عَلَى الْحَرْفِ الصَّحِيحِ - سَتَجِدُهُ فِي الصُّورَةِ
+</footer>
+
+<script>
+    // تسجيل الصوت للتغذية الراجعة
+    const soundFiles = {
+        alif: 'Alif.m4a',
+        baa: 'Baa.m4a',
+        taa: 'Taa.m4a',
+        question1: 'whereisalif.m4a',
+        question2: 'whereisbaa.m4a',
+        question3: 'whereistaa.m4a',
+        correct: 'correctar.m4a',
+        wrong: 'wrongar.m4a',
+        victory: 'finish.mp3'
+    };
+
+    let victoryAudio = null;
+
+    function playAudio(type) {
+        const file = soundFiles[type];
+        if (!file) {
+            console.log('ملف الصوت غير موجود:', type);
+            return;
+        }
+        try {
+            const audio = new Audio(file);
+            audio.play().catch(e => {
+                console.log('تعذر تشغيل الصوت:', e);
+            });
+        } catch (e) {
+            console.log('خطأ في تشغيل الصوت:', e);
+        }
+    }
+
+    function playQuestionAudio(index) {
+        const files = ['question1', 'question2', 'question3'];
+        if (index < 0 || index >= files.length) return;
+        playAudio(files[index]);
+    }
+
+    function playVictoryMusic() {
+        const file = soundFiles.victory;
+        if (!file) {
+            console.log('ملف الفوز غير موجود');
+            return;
+        }
+        try {
+            // إيقاف أي موسيقى سابقة
+            if (victoryAudio) {
+                victoryAudio.pause();
+                victoryAudio.currentTime = 0;
+            }
+            victoryAudio = new Audio(file);
+            victoryAudio.loop = false;
+            victoryAudio.play().catch(e => {
+                console.log('تعذر تشغيل موسيقى الفوز:', e);
+            });
+        } catch (e) {
+            console.log('خطأ في تشغيل موسيقى الفوز:', e);
+        }
+    }
+
+    function stopVictoryMusic() {
+        if (victoryAudio) {
+            victoryAudio.pause();
+            victoryAudio.currentTime = 0;
+            victoryAudio = null;
+        }
+    }
+
+    function testSound() {
+        playAudio('alif');
+        setTimeout(() => playAudio('baa'), 1200);
+        setTimeout(() => playAudio('taa'), 2400);
+        setTimeout(() => playAudio('question1'), 3600);
+        setTimeout(() => playAudio('correct'), 4800);
+        setTimeout(() => playAudio('wrong'), 6000);
+        setTimeout(() => playAudio('victory'), 7200);
+    }
+
+    // تعريف الحروف مع صورها وصوتياتها
+    const letters = [
+        { letter: "أ", name: "أَلِف", audio: "alif", images: ["🐇", "🦁"] },
+        { letter: "ب", name: "بَاء", audio: "baa", images: ["🏠", "🐄"] },
+        { letter: "ت", name: "تَاء", audio: "taa", images: ["🍎", "🌴"] }
+    ];
+
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let userAnswers = [];
+    let quizFinished = false;
+    let allCorrect = false;
+
+    const introSection = document.getElementById('introSection');
+    const quizContainer = document.getElementById('quizContainer');
+    const questionContainer = document.getElementById('questionContainer');
+    const startBtn = document.getElementById('startQuizBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const currentQSpan = document.getElementById('currentQuestion');
+
+    // بدء الاختبار
+    startBtn.addEventListener('click', () => {
+        introSection.style.display = 'none';
+        quizContainer.classList.add('active');
+        startQuiz();
+    });
+
+    function startQuiz() {
+        stopVictoryMusic();
+        // ترتيب عشوائي للأسئلة
+        const shuffled = [...letters];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        currentQuestions = shuffled;
+        currentIndex = 0;
+        userAnswers = [];
+        quizFinished = false;
+        allCorrect = false;
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        if (currentIndex >= currentQuestions.length) {
+            if (!quizFinished) finishQuiz();
+            return;
+        }
+
+        const q = currentQuestions[currentIndex];
+        const saved = userAnswers[currentIndex];
+
+        // خيارات عشوائية (جميع الحروف الثلاثة)
+        let options = ['أ', 'ب', 'ت'];
+        for (let i = options.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [options[i], options[j]] = [options[j], options[i]];
+        }
+
+        let html = `
+            <div class="question-area" id="qArea">
+                <div class="question-text" id="questionText" onclick="playQuestionAudio(${currentIndex})">
+                    <span class="question-sound-icon"><i class="fas fa-volume-up"></i></span>
+                    🔍 أَيْنَ حَرْفُ <span class="question-highlight">${q.letter}</span>؟
+                    <span style="font-size:0.7rem; color:#888; display:block; margin-top:5px;">(اِضْغَطْ لِتَسْمَعَ السُّؤَالَ)</span>
+                </div>
+                <div class="options-area" id="optsArea">
+        `;
+
+        options.forEach(opt => {
+            html += `<button class="option-btn" data-opt="${opt}">${opt}</button>`;
+        });
+
+        html += `
+                </div>
+                <div id="fbMsg" class="feedback-message"></div>
+                <button class="next-btn" id="nextBtn" disabled>السُّؤَالُ التَّالِي 🌟</button>
+            </div>
+        `;
+
+        questionContainer.innerHTML = html;
+        currentQSpan.innerText = currentIndex + 1;
+
+        // تشغيل صوت السؤال تلقائياً عند ظهوره
+        setTimeout(() => {
+            playQuestionAudio(currentIndex);
+        }, 500);
+
+        const btns = document.querySelectorAll('.option-btn');
+        const fbDiv = document.getElementById('fbMsg');
+        const nextBtn = document.getElementById('nextBtn');
+
+        if (saved) {
+            // عرض النتيجة السابقة
+            btns.forEach(btn => {
+                btn.disabled = true;
+                const opt = btn.getAttribute('data-opt');
+                if (opt === q.letter) {
+                    btn.classList.add('correct-answer');
+                } else if (opt === saved.selected && !saved.isCorrect) {
+                    btn.classList.add('wrong-answer');
+                }
+            });
+            if (saved.isCorrect) {
+                fbDiv.innerHTML = `<div class="feedback-correct">✅ أَحْسَنْتَ! هَذَا هُوَ حَرْفُ ${q.letter}</div>`;
+            } else {
+                fbDiv.innerHTML = `<div class="feedback-wrong">❌ لَيْسَ صَحِيحًا. الْحَرْفُ الصَّحِيحُ هُوَ ${q.letter}</div>`;
+            }
+            nextBtn.disabled = false;
+        } else {
+            btns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    if (quizFinished) return;
+                    const selected = btn.getAttribute('data-opt');
+                    const isCorrect = (selected === q.letter);
+                    userAnswers[currentIndex] = { isCorrect, selected, correctAnswer: q.letter };
+
+                    // تشغيل الصوت
+                    if (isCorrect) {
+                        playAudio('correct');
+                    } else {
+                        playAudio('wrong');
+                    }
+
+                    // تمييز الإجابات
+                    btns.forEach(b => {
+                        b.disabled = true;
+                        const opt = b.getAttribute('data-opt');
+                        if (opt === q.letter) {
+                            b.classList.add('correct-answer');
+                        } else if (opt === selected && !isCorrect) {
+                            b.classList.add('wrong-answer');
+                        }
+                    });
+
+                    if (isCorrect) {
+                        fbDiv.innerHTML = `<div class="feedback-correct">🎉 أَحْسَنْتَ يَا بَطَلِي! هَذَا هُوَ حَرْفُ ${q.letter}</div>`;
+                        // تأثير احتفال
+                        const area = document.getElementById('qArea');
+                        area.classList.add('celebrate');
+                        setTimeout(() => area.classList.remove('celebrate'), 400);
+                    } else {
+                        fbDiv.innerHTML = `<div class="feedback-wrong">😊 لَيْسَ صَحِيحًا. حَاوِلْ مَرَّةً أُخْرَى! الْحَرْفُ الصَّحِيحُ هُوَ ${q.letter}</div>`;
+                    }
+
+                    nextBtn.disabled = false;
+                });
+            });
+        }
+
+        nextBtn.onclick = () => {
+            if (quizFinished) return;
+            if (!userAnswers[currentIndex]) {
+                fbDiv.innerHTML = `<span style="color:#c0392b;">⚠️ اخْتَرِ الْحَرْفَ الصَّحِيحَ أَوَّلًا ⚠️</span>`;
+                return;
+            }
+            if (currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                renderQuestion();
+            } else {
+                if (!quizFinished) finishQuiz();
+            }
+        };
+    }
+
+    function finishQuiz() {
+        quizFinished = true;
+        const total = currentQuestions.length;
+        const correct = userAnswers.filter(a => a && a.isCorrect === true).length;
+
+        // التحقق مما إذا كانت جميع الإجابات صحيحة
+        allCorrect = (correct === total);
+
+        let msg = "";
+        let emoji = "";
+        if (allCorrect) {
+            msg = "🎉 مُمْتَازٌ! حَفِظْتَ الْحُرُوفَ الثَّلَاثَةَ كُلَّهَا! أَنْتَ بَطَلٌ حَقًّا!";
+            emoji = "🏆🌟";
+            // تشغيل موسيقى النصر
+            playVictoryMusic();
+        } else if (correct >= 2) {
+            msg = "🌟 جَيِّدٌ جِدًّا! تَذَكَّرْتَ مُعْظَمَ الْحُرُوفِ. كُرِّرِ اللَّعْبَةَ لِتُتْقِنَهَا كُلَّهَا!";
+            emoji = "📚✨";
+            playAudio('correct');
+        } else {
+            msg = "💪 لَا تَقْلَقْ! كُلُّ بِدَايَةٍ صَعْبَةٌ. اِلْعَبْ مَرَّةً أُخْرَى وَسَتَتَذَكَّرُ الْحُرُوفَ بِسُرْعَةٍ!";
+            emoji = "🌈⭐";
+            playAudio('wrong');
+        }
+
+        const html = `
+            <div class="question-area">
+                <div style="font-size:4rem; margin-bottom:15px;">${emoji}</div>
+                <div class="final-result">
+                    ${msg}<br>
+                    <span style="font-size:1rem;">نَتَيْجَتُكَ: ${correct} مِنْ ${total}</span>
+                    <br>
+                    <button class="start-btn" onclick="location.reload()" style="margin-top:15px; font-size:1rem; padding:10px 30px;">
+                        🔄 اِلْعَبْ مَرَّةً أُخْرَى
+                    </button>
+                </div>
+            </div>
+        `;
+
+        questionContainer.innerHTML = html;
+    }
+
+    // إعادة تعيين اللعبة
+    resetBtn.addEventListener('click', () => {
+        stopVictoryMusic();
+        introSection.style.display = 'block';
+        quizContainer.classList.remove('active');
+        startQuiz();
+    });
+</script>
+</body>
+</html>
