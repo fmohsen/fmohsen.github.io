@@ -506,9 +506,9 @@
         alif: 'Alif.m4a',
         baa: 'Baa.m4a',
         taa: 'Taa.m4a',
-        question1: 'whereisalif.m4a',
-        question2: 'whereisbaa.m4a',
-        question3: 'whereistaa.m4a',
+        questionAlif: 'whereisalif.m4a',
+        questionBaa: 'whereisbaa.m4a',
+        questionTaa: 'whereistaa.m4a',
         correct: 'correctar.m4a',
         wrong: 'wrongar.m4a',
         victory: 'finish.mp3'
@@ -532,10 +532,16 @@
         }
     }
 
-    function playQuestionAudio(index) {
-        const files = ['question1', 'question2', 'question3'];
-        if (index < 0 || index >= files.length) return;
-        playAudio(files[index]);
+    function playQuestionAudio(letter) {
+        const map = {
+            'أ': 'questionAlif',
+            'ب': 'questionBaa',
+            'ت': 'questionTaa'
+        };
+        const key = map[letter];
+        if (key) {
+            playAudio(key);
+        }
     }
 
     function playVictoryMusic() {
@@ -545,7 +551,6 @@
             return;
         }
         try {
-            // إيقاف أي موسيقى سابقة
             if (victoryAudio) {
                 victoryAudio.pause();
                 victoryAudio.currentTime = 0;
@@ -572,7 +577,7 @@
         playAudio('alif');
         setTimeout(() => playAudio('baa'), 1200);
         setTimeout(() => playAudio('taa'), 2400);
-        setTimeout(() => playAudio('question1'), 3600);
+        setTimeout(() => playAudio('questionAlif'), 3600);
         setTimeout(() => playAudio('correct'), 4800);
         setTimeout(() => playAudio('wrong'), 6000);
         setTimeout(() => playAudio('victory'), 7200);
@@ -580,9 +585,9 @@
 
     // تعريف الحروف مع صورها وصوتياتها
     const letters = [
-        { letter: "أ", name: "أَلِف", audio: "alif", images: ["🐇", "🦁"] },
-        { letter: "ب", name: "بَاء", audio: "baa", images: ["🏠", "🐄"] },
-        { letter: "ت", name: "تَاء", audio: "taa", images: ["🍎", "🌴"] }
+        { letter: "أ", name: "أَلِف", audio: "alif", questionAudio: "questionAlif", images: ["🐇", "🦁"] },
+        { letter: "ب", name: "بَاء", audio: "baa", questionAudio: "questionBaa", images: ["🏠", "🐄"] },
+        { letter: "ت", name: "تَاء", audio: "taa", questionAudio: "questionTaa", images: ["🍎", "🌴"] }
     ];
 
     let currentQuestions = [];
@@ -639,7 +644,7 @@
 
         let html = `
             <div class="question-area" id="qArea">
-                <div class="question-text" id="questionText" onclick="playQuestionAudio(${currentIndex})">
+                <div class="question-text" id="questionText" onclick="playQuestionAudio('${q.letter}')">
                     <span class="question-sound-icon"><i class="fas fa-volume-up"></i></span>
                     🔍 أَيْنَ حَرْفُ <span class="question-highlight">${q.letter}</span>؟
                     <span style="font-size:0.7rem; color:#888; display:block; margin-top:5px;">(اِضْغَطْ لِتَسْمَعَ السُّؤَالَ)</span>
@@ -663,7 +668,7 @@
 
         // تشغيل صوت السؤال تلقائياً عند ظهوره
         setTimeout(() => {
-            playQuestionAudio(currentIndex);
+            playQuestionAudio(q.letter);
         }, 500);
 
         const btns = document.querySelectorAll('.option-btn');
