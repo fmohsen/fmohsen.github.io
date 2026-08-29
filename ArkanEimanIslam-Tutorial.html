@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>أركان الإسلام وأركان الإيمان - مادة قرائية مصورة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e8f0e8, #d4e4d0);
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+            padding: 25px 16px 45px;
+            min-height: 100vh;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(115deg, #1B5E20, #0D5302);
+            padding: 20px;
+            border-radius: 70px 70px 45px 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.25);
+            border: 3px solid #FFE0A3;
+            position: relative;
+            min-height: 140px;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background: #c5e0d4;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 3px 3px 0 #0a3a0a;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #FFF2CC;
+            background: #2E7D32b3;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 60px;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .content-container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        /* أقسام المادة */
+        .section {
+            background: white;
+            border-radius: 55px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            border: 2px solid #C8E6C9;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1B5E20;
+            background: #E8F5E9;
+            display: inline-block;
+            padding: 6px 25px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: #5D4037;
+            background: #FDF5E6;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin-bottom: 25px;
+            border-right: 8px solid #FFB347;
+            line-height: 1.8;
+        }
+
+        /* شبكة البطاقات */
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .pillar-card {
+            background: #FFFDF7;
+            border-radius: 40px;
+            padding: 20px 15px;
+            text-align: center;
+            border: 2px solid #C8E6C9;
+            transition: transform 0.2s;
+            cursor: default;
+        }
+
+        .pillar-card:hover {
+            transform: scale(1.03);
+            border-color: #1B5E20;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .pillar-icon {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .pillar-number {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1B5E20;
+            background: #E8F5E9;
+            display: inline-block;
+            padding: 2px 14px;
+            border-radius: 30px;
+            margin-bottom: 8px;
+        }
+
+        .pillar-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #1B5E20;
+        }
+
+        .pillar-desc {
+            font-size: 0.9rem;
+            color: #6B8A6B;
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        .pillar-example {
+            font-size: 0.85rem;
+            color: #A5662A;
+            background: #FFF8E1;
+            padding: 4px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .pillar-card .pillar-icon {
+            font-size: 3.5rem;
+        }
+
+        /* تلوين خاص لأركان الإيمان */
+        .iman-section .pillar-card {
+            border-color: #BBDEFB;
+        }
+
+        .iman-section .pillar-card:hover {
+            border-color: #1565C0;
+        }
+
+        .iman-section .pillar-number {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .iman-section .pillar-name {
+            color: #1565C0;
+        }
+
+        /* قسم التذكير */
+        .reminder-box {
+            background: #FFF8E1;
+            border-radius: 40px;
+            padding: 20px;
+            margin-top: 25px;
+            border: 2px dashed #FFD54F;
+            text-align: center;
+        }
+
+        .reminder-box h3 {
+            color: #F57F17;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .reminder-box p {
+            font-size: 1rem;
+            color: #5D4037;
+            line-height: 1.8;
+        }
+
+        .memory-tip {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .memory-tip-item {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 1rem;
+        }
+
+        .memory-tip-item .num {
+            color: #1B5E20;
+        }
+
+        .memory-tip-item .iman-num {
+            color: #1565C0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #5D4037;
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .pillar-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .hero-image-container {
+                width: 60px;
+                height: 60px;
+                left: 10px;
+            }
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .pillar-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-image-container">
+        <img src="child.jpg" alt="صورة الطفل" id="heroImage" onerror="this.style.display='none'; document.getElementById('heroImageContainer').style.display='none'">
+    </div>
+    <h1>🕌 أَرْكَانُ الإِسْلَامِ وَالإِيمَانِ 🕌</h1>
+    <p>تَعَلَّمْ بِالصُّوَرِ وَالأَمْثِلَةِ</p>
+</div>
+
+<div class="content-container">
+
+    <!-- ========================================== -->
+    <!-- ===== أَرْكَانُ الإِسْلَامِ ===== -->
+    <!-- ========================================== -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-star" style="color:#F9A825;"></i> أَرْكَانُ الإِسْلَامِ (خَمْسَةٌ)</div>
+        <div class="section-desc">
+            <i class="fas fa-quote-right" style="color:#8B5A2B;"></i>
+            قَالَ رَسُولُ اللَّهِ ﷺ: «بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ»
+        </div>
+
+        <div class="pillar-grid">
+            <!-- الركن الأول -->
+            <div class="pillar-card">
+                <span class="pillar-icon">🕋</span>
+                <span class="pillar-number">١</span>
+                <div class="pillar-name">الشَّهَادَتَانِ</div>
+                <div class="pillar-desc">أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ<br>وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ</div>
+                <div class="pillar-example">📖 أَوَّلُ أَرْكَانِ الإِسْلَامِ</div>
+            </div>
+
+            <!-- الركن الثاني -->
+            <div class="pillar-card">
+                <span class="pillar-icon">🧎</span>
+                <span class="pillar-number">٢</span>
+                <div class="pillar-name">إِقَامُ الصَّلَاةِ</div>
+                <div class="pillar-desc">الصَّلَوَاتُ الْخَمْسُ فِي الْيَوْمِ وَاللَّيْلَةِ</div>
+                <div class="pillar-example">⏰ الْفَجْرُ - الظُّهْرُ - الْعَصْرُ - الْمَغْرِبُ - الْعِشَاءُ</div>
+            </div>
+
+            <!-- الركن الثالث -->
+            <div class="pillar-card">
+                <span class="pillar-icon">💰</span>
+                <span class="pillar-number">٣</span>
+                <div class="pillar-name">إِيتَاءُ الزَّكَاةِ</div>
+                <div class="pillar-desc">إِعْطَاءُ الْفُقَرَاءِ وَالْمَسَاكِينِ حَقَّ الْمَالِ</div>
+                <div class="pillar-example">🤲 تُطَهِّرُ الْمَالَ وَتُزَكِّي النَّفْسَ</div>
+            </div>
+
+            <!-- الركن الرابع -->
+            <div class="pillar-card">
+                <span class="pillar-icon">🌙</span>
+                <span class="pillar-number">٤</span>
+                <div class="pillar-name">صَوْمُ رَمَضَانَ</div>
+                <div class="pillar-desc">الإِمْسَاكُ عَنِ الطَّعَامِ وَالشَّرَابِ مِنَ الْفَجْرِ إِلَى الْمَغْرِبِ</div>
+                <div class="pillar-example">🍽️ تَعْلِيمُ الصَّبْرِ وَالتَّقْوَى</div>
+            </div>
+
+            <!-- الركن الخامس -->
+            <div class="pillar-card">
+                <span class="pillar-icon">🕋</span>
+                <span class="pillar-number">٥</span>
+                <div class="pillar-name">حَجُّ الْبَيْتِ</div>
+                <div class="pillar-desc">قَصْدُ الْكَعْبَةِ فِي مَكَّةَ لِلْحَجِّ</div>
+                <div class="pillar-example">🤲 مَرَّةٌ وَاحِدَةٌ فِي الْعُمْرِ لِمَنِ اسْتَطَاعَ</div>
+            </div>
+        </div>
+
+        <div class="reminder-box">
+            <h3>🧠 طَرِيقَةٌ لِلْحِفْظِ</h3>
+            <div class="memory-tip">
+                <span class="memory-tip-item"><span class="num">١</span> شَهَادَة</span>
+                <span class="memory-tip-item"><span class="num">٢</span> صَلَاة</span>
+                <span class="memory-tip-item"><span class="num">٣</span> زَكَاة</span>
+                <span class="memory-tip-item"><span class="num">٤</span> صَوْم</span>
+                <span class="memory-tip-item"><span class="num">٥</span> حَجّ</span>
+            </div>
+            <p style="margin-top:10px;">📌 <strong>تَذَكَّرْ:</strong> الشَّهَادَتَانِ هُمَا الْمِفْتَاحُ، وَالصَّلَاةُ عِمَادُ الدِّينِ</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ===== أَرْكَانُ الإِيمَانِ ===== -->
+    <!-- ========================================== -->
+    <div class="section iman-section">
+        <div class="section-title"><i class="fas fa-star" style="color:#1565C0;"></i> أَرْكَانُ الإِيمَانِ (سِتَّةٌ)</div>
+        <div class="section-desc">
+            <i class="fas fa-quote-right" style="color:#1565C0;"></i>
+            قَالَ رَسُولُ اللَّهِ ﷺ: «أَنْ تُؤْمِنَ بِاللَّهِ، وَمَلَائِكَتِهِ، وَكُتُبِهِ، وَرُسُلِهِ، وَالْيَوْمِ الْآخِرِ، وَتُؤْمِنَ بِالْقَدَرِ خَيْرِهِ وَشَرِّهِ»
+        </div>
+
+        <div class="pillar-grid">
+            <!-- الركن الأول -->
+            <div class="pillar-card">
+                <span class="pillar-icon">🤲</span>
+                <span class="pillar-number">١</span>
+                <div class="pillar-name">الإِيمَانُ بِاللَّهِ</div>
+                <div class="pillar-desc">التَّصْدِيقُ بِوُجُودِ اللَّهِ وَأَنَّهُ الْخَالِقُ الْمُدَبِّرُ</div>
+                <div class="pillar-example">⭐ تَوْحِيدُهُ فِي عِبَادَتِهِ</div>
+            </div>
+
+            <!-- الركن الثاني -->
+            <div class="pillar-card">
+                <span class="pillar-icon">👼</span>
+                <span class="pillar-number">٢</span>
+                <div class="pillar-name">الإِيمَانُ بِالْمَلَائِكَةِ</div>
+                <div class="pillar-desc">خَلْقٌ مِنْ نُورٍ، عِبَادٌ مُكَرَّمُونَ</div>
+                <div class="pillar-example">جِبْرِيلُ - مِيكَائِيلُ - مَلَكُ الْمَوْتِ</div>
+            </div>
+
+            <!-- الركن الثالث -->
+            <div class="pillar-card">
+                <span class="pillar-icon">📖</span>
+                <span class="pillar-number">٣</span>
+                <div class="pillar-name">الإِيمَانُ بِالْكُتُبِ</div>
+                <div class="pillar-desc">كُتُبٌ أَنْزَلَهَا اللَّهُ لِهَدَايَةِ النَّاسِ</div>
+                <div class="pillar-example">الْقُرْآنُ - التَّوْرَاةُ - الْإِنْجِيلُ - الزَّبُورُ</div>
+            </div>
+
+            <!-- الركن الرابع -->
+            <div class="pillar-card">
+                <span class="pillar-icon">📜</span>
+                <span class="pillar-number">٤</span>
+                <div class="pillar-name">الإِيمَانُ بِالرُّسُلِ</div>
+                <div class="pillar-desc">رُسُلٌ أَرْسَلَهُمُ اللَّهُ لِهَدَايَةِ النَّاسِ</div>
+                <div class="pillar-example">مُحَمَّدٌ ﷺ - مُوسَى - عِيسَى - إِبْرَاهِيمُ</div>
+            </div>
+
+            <!-- الركن الخامس -->
+            <div class="pillar-card">
+                <span class="pillar-icon">🌅</span>
+                <span class="pillar-number">٥</span>
+                <div class="pillar-name">الإِيمَانُ بِالْيَوْمِ الْآخِرِ</div>
+                <div class="pillar-desc">يَوْمُ الْقِيَامَةِ، الْحِسَابُ، الْجَنَّةُ وَالنَّارُ</div>
+                <div class="pillar-example">⚖️ الْجَزَاءُ عَلَى الْأَعْمَالِ</div>
+            </div>
+
+            <!-- الركن السادس -->
+            <div class="pillar-card">
+                <span class="pillar-icon">🌍</span>
+                <span class="pillar-number">٦</span>
+                <div class="pillar-name">الإِيمَانُ بِالْقَدَرِ</div>
+                <div class="pillar-desc">الْإِيمَانُ بِأَنَّ كُلَّ شَيْءٍ بِعِلْمِ اللَّهِ وَمَشِيئَتِهِ</div>
+                <div class="pillar-example">خَيْرُهُ وَشَرُّهُ بِقَضَاءِ اللَّهِ</div>
+            </div>
+        </div>
+
+        <div class="reminder-box">
+            <h3>🧠 طَرِيقَةٌ لِلْحِفْظِ</h3>
+            <div class="memory-tip">
+                <span class="memory-tip-item"><span class="iman-num">١</span> اللَّهُ</span>
+                <span class="memory-tip-item"><span class="iman-num">٢</span> مَلَائِكَة</span>
+                <span class="memory-tip-item"><span class="iman-num">٣</span> كُتُب</span>
+                <span class="memory-tip-item"><span class="iman-num">٤</span> رُسُل</span>
+                <span class="memory-tip-item"><span class="iman-num">٥</span> الْيَوْم الْآخِر</span>
+                <span class="memory-tip-item"><span class="iman-num">٦</span> الْقَدَر</span>
+            </div>
+            <p style="margin-top:10px;">📌 <strong>تَذَكَّرْ:</strong> الإِيمَانُ يَزِيدُ وَيَنْقُصُ، وَأَرْكَانُهُ سِتَّةٌ</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ===== المقارنة بينهما ===== -->
+    <!-- ========================================== -->
+    <div class="section" style="background: #FFF8E1; border-color: #FFD54F;">
+        <div class="section-title" style="background: #FFF3CD; color: #F57F17;"><i class="fas fa-balance-scale"></i> الْفَرْقُ بَيْنَهُمَا</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+            <div style="background: #E8F5E9; border-radius: 40px; padding: 20px; text-align: center; border: 2px solid #4CAF50;">
+                <h3 style="color: #1B5E20; font-size: 1.3rem;">🕌 أَرْكَانُ الإِسْلَامِ</h3>
+                <p style="font-size: 1.1rem; font-weight: 700; color: #1B5E20;">خَمْسَةٌ</p>
+                <p style="font-size: 0.9rem; color: #5D4037;">أَعْمَالٌ ظَاهِرَةٌ (مَا نَفْعَلُهُ)</p>
+                <div style="margin-top:10px; font-size:0.9rem; color:#6B8A6B;">
+                    شَهَادَة - صَلَاة - زَكَاة - صَوْم - حَجّ
+                </div>
+            </div>
+            <div style="background: #E3F2FD; border-radius: 40px; padding: 20px; text-align: center; border: 2px solid #1565C0;">
+                <h3 style="color: #1565C0; font-size: 1.3rem;">⭐ أَرْكَانُ الإِيمَانِ</h3>
+                <p style="font-size: 1.1rem; font-weight: 700; color: #1565C0;">سِتَّةٌ</p>
+                <p style="font-size: 0.9rem; color: #5D4037;">أَعْمَالٌ بَاطِنَةٌ (مَا نُؤْمِنُ بِهِ فِي الْقَلْبِ)</p>
+                <div style="margin-top:10px; font-size:0.9rem; color:#6B8A6B;">
+                    اللَّهُ - مَلَائِكَة - كُتُب - رُسُل - الْيَوْم الْآخِر - الْقَدَر
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:20px; padding:15px; background:#FFF8E1; border-radius:40px;">
+            <p style="font-size:1rem; font-weight:700; color:#E65100;">
+                💡 تَذَكَّرْ: الإِسْلَامُ (ظَاهِرٌ) + الإِيمَانُ (بَاطِنٌ) = الدِّينُ الْكَامِلُ
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    📖 اِقْرَأْ وَتَأَمَّلْ، وَتَذَكَّرْ أَنَّ اللَّهَ يُحِبُّ الْمُؤْمِنِينَ
+</footer>
+
+</body>
+</html>

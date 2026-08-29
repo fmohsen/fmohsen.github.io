@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>درس تفاعلي: أصابع اليد - التقويم الهجري</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e8f0fe, #d9e6f5);
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+            padding: 25px 16px 45px;
+            min-height: 100vh;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(115deg, #1e6b5e, #0f5c4f);
+            padding: 20px;
+            border-radius: 70px 70px 45px 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.25);
+            border: 3px solid #FFE0A3;
+            position: relative;
+            min-height: 140px;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background: #c5e0d4;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 3px 3px 0 #0b4b3a;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #FFF2CC;
+            background: #2a8a7ab3;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 60px;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .content-container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        /* أقسام الدرس */
+        .section {
+            background: white;
+            border-radius: 55px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            border: 2px solid #c5e0d4;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1e6b5e;
+            background: #EFFAF5;
+            display: inline-block;
+            padding: 6px 25px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: #5D4037;
+            background: #FDF5E6;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin-bottom: 25px;
+            border-right: 8px solid #FFB347;
+            line-height: 1.8;
+        }
+
+        /* أقسام الأصابع */
+        .finger-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .finger-card {
+            background: #FFFDF7;
+            border-radius: 40px;
+            padding: 20px 15px;
+            text-align: center;
+            border: 2px solid #c5e0d4;
+            transition: transform 0.2s;
+            cursor: default;
+        }
+
+        .finger-card:hover {
+            transform: scale(1.05);
+            border-color: #1e6b5e;
+        }
+
+        .finger-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .finger-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #1e6b5e;
+        }
+
+        .finger-meaning {
+            font-size: 0.9rem;
+            color: #6B8A7A;
+            margin-top: 4px;
+        }
+
+        .finger-example {
+            font-size: 0.85rem;
+            color: #A5662A;
+            background: #FFF8E1;
+            padding: 4px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        /* التقويم الهجري */
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .month-card {
+            background: #FFFDF7;
+            border-radius: 40px;
+            padding: 15px 10px;
+            text-align: center;
+            border: 2px solid #c5e0d4;
+            transition: transform 0.2s;
+            cursor: default;
+        }
+
+        .month-card:hover {
+            transform: scale(1.03);
+            border-color: #1e6b5e;
+        }
+
+        .month-number {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1e6b5e;
+            background: #EFFAF5;
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 30px;
+        }
+
+        .month-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1e6b5e;
+            margin-top: 5px;
+        }
+
+        .month-meaning {
+            font-size: 0.8rem;
+            color: #6B8A7A;
+            margin-top: 3px;
+        }
+
+        /* تلوين الشهور الحرم */
+        .month-card.haram {
+            border-color: #FFB74D;
+            background: #FFF3E0;
+        }
+
+        .month-card.haram .month-name {
+            color: #E65100;
+        }
+
+        /* قسم التذكير */
+        .reminder-box {
+            background: #FFF8E1;
+            border-radius: 40px;
+            padding: 20px;
+            margin-top: 25px;
+            border: 2px dashed #FFD54F;
+            text-align: center;
+        }
+
+        .reminder-box h3 {
+            color: #F57F17;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .reminder-box p {
+            font-size: 1rem;
+            color: #5D4037;
+            line-height: 1.8;
+        }
+
+        .memory-tip {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .memory-tip-item {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 1rem;
+        }
+
+        .hand-diagram {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .hand-diagram .finger {
+            background: #FFFDF7;
+            padding: 15px 8px;
+            border-radius: 40px;
+            text-align: center;
+            border: 2px solid #c5e0d4;
+            min-width: 70px;
+        }
+
+        .hand-diagram .finger .icon {
+            font-size: 2.5rem;
+        }
+
+        .hand-diagram .finger .name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1e6b5e;
+        }
+
+        .hand-diagram .finger.thumb { border-color: #FFB74D; }
+        .hand-diagram .finger.index { border-color: #4FC3F7; }
+        .hand-diagram .finger.middle { border-color: #81C784; }
+        .hand-diagram .finger.ring { border-color: #CE93D8; }
+        .hand-diagram .finger.pinky { border-color: #FF8A65; }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #5D4037;
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .finger-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .months-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+            .hand-diagram .finger {
+                min-width: 50px;
+                padding: 10px 5px;
+            }
+            .hand-diagram .finger .icon {
+                font-size: 1.8rem;
+            }
+            .hero-image-container {
+                width: 60px;
+                height: 60px;
+                left: 10px;
+            }
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .finger-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-image-container">
+        <img src="child.jpg" alt="صورة الطفل" id="heroImage" onerror="this.style.display='none'; document.getElementById('heroImageContainer').style.display='none'">
+    </div>
+    <h1>📖 أَصَابِعُ الْيَدِ - التَّقْوِيمُ الْهِجْرِيُّ 📖</h1>
+    <p>تَعَلَّمْ أَسْمَاءَ أَصَابِعِكَ وَأَشْهُرَ الْعَامِ الْهِجْرِيِّ</p>
+</div>
+
+<div class="content-container">
+
+    <!-- ========================================== -->
+    <!-- ===== أَسْمَاءُ أَصَابِعِ الْيَدِ ===== -->
+    <!-- ========================================== -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-hand-peace" style="color:#1e6b5e;"></i> أَسْمَاءُ أَصَابِعِ الْيَدِ</div>
+        <div class="section-desc">
+            <i class="fas fa-quote-right" style="color:#8B5A2B;"></i>
+            الْيَدُ الْإِنْسَانِيَّةُ تَحْتَوِي عَلَى خَمْسِ أَصَابِعَ، لِكُلِّ إِصْبَعٍ اسْمٌ يُمَيِّزُهُ.
+        </div>
+
+        <!-- رسم توضيحي بسيط لليد -->
+        <div class="hand-diagram">
+            <div class="finger thumb">
+                <div class="icon">👍</div>
+                <div class="name">إِبْهَام</div>
+            </div>
+            <div class="finger index">
+                <div class="icon">👆</div>
+                <div class="name">سَبَّابَة</div>
+            </div>
+            <div class="finger middle">
+                <div class="icon">🖕</div>
+                <div class="name">وُسْطَى</div>
+            </div>
+            <div class="finger ring">
+                <div class="icon">💍</div>
+                <div class="name">بِنْصِر</div>
+            </div>
+            <div class="finger pinky">
+                <div class="icon">🤙</div>
+                <div class="name">خِنْصِر</div>
+            </div>
+        </div>
+
+        <div class="finger-grid">
+            <div class="finger-card">
+                <span class="finger-icon">👍</span>
+                <div class="finger-name">الإِبْهَام</div>
+                <div class="finger-meaning">أَكْبَرُ الْأَصَابِعِ</div>
+                <div class="finger-example">يُسْتَخْدَمُ لِلْإِشَارَةِ وَالْحَمْلِ</div>
+            </div>
+            <div class="finger-card">
+                <span class="finger-icon">👆</span>
+                <div class="finger-name">السَّبَّابَة</div>
+                <div class="finger-meaning">إِصْبَعُ الْإِشَارَةِ</div>
+                <div class="finger-example">نُشِيرُ بِهَا فِي الصَّلَاةِ</div>
+            </div>
+            <div class="finger-card">
+                <span class="finger-icon">🖕</span>
+                <div class="finger-name">الْوُسْطَى</div>
+                <div class="finger-meaning">أَطْوَلُ الْأَصَابِعِ</div>
+                <div class="finger-example">تَقَعُ فِي وَسَطِ الْيَدِ</div>
+            </div>
+            <div class="finger-card">
+                <span class="finger-icon">💍</span>
+                <div class="finger-name">الْبِنْصِر</div>
+                <div class="finger-meaning">يَلِي الْخِنْصِرَ</div>
+                <div class="finger-example">نَرْتَدِي الْخَاتَمَ فِيهِ</div>
+            </div>
+            <div class="finger-card">
+                <span class="finger-icon">🤙</span>
+                <div class="finger-name">الْخِنْصِر</div>
+                <div class="finger-meaning">أَصْغَرُ الْأَصَابِعِ</div>
+                <div class="finger-example">يُسْتَخْدَمُ فِي الْوَضُوءِ</div>
+            </div>
+        </div>
+
+        <div class="reminder-box">
+            <h3>🧠 طَرِيقَةٌ لِلْحِفْظِ</h3>
+            <div class="memory-tip">
+                <span class="memory-tip-item">👍 إِبْهَام</span>
+                <span class="memory-tip-item">👆 سَبَّابَة</span>
+                <span class="memory-tip-item">🖕 وُسْطَى</span>
+                <span class="memory-tip-item">💍 بِنْصِر</span>
+                <span class="memory-tip-item">🤙 خِنْصِر</span>
+            </div>
+            <p style="margin-top:10px;">📌 <strong>تَذَكَّرْ:</strong> بِدْءًا مِنَ الْإِبْهَامِ: إِبْهَام - سَبَّابَة - وُسْطَى - بِنْصِر - خِنْصِر</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ===== التَّقْوِيمُ الْهِجْرِيُّ ===== -->
+    <!-- ========================================== -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-calendar-alt" style="color:#1e6b5e;"></i> التَّقْوِيمُ الْهِجْرِيُّ وَأَشْهُرُهُ</div>
+        <div class="section-desc">
+            <i class="fas fa-quote-right" style="color:#8B5A2B;"></i>
+            التَّقْوِيمُ الْهِجْرِيُّ هُوَ تَقْوِيمٌ قَمَرِيٌّ، يَبْدَأُ بِهِجْرَةِ الرَّسُولِ ﷺ مِنْ مَكَّةَ إِلَى الْمَدِينَةِ.
+        </div>
+
+        <div class="months-grid">
+            <div class="month-card">
+                <span class="month-number">١</span>
+                <div class="month-name">مُحَرَّم</div>
+                <div class="month-meaning">شَهْرٌ حَرَامٌ</div>
+            </div>
+            <div class="month-card">
+                <span class="month-number">٢</span>
+                <div class="month-name">صَفَر</div>
+                <div class="month-meaning">شَهْرُ الصَّفَرِ</div>
+            </div>
+            <div class="month-card">
+                <span class="month-number">٣</span>
+                <div class="month-name">رَبِيعُ الْأَوَّلِ</div>
+                <div class="month-meaning">مَوْلِدُ النَّبِيِّ ﷺ</div>
+            </div>
+            <div class="month-card">
+                <span class="month-number">٤</span>
+                <div class="month-name">رَبِيعُ الْآخِرِ</div>
+                <div class="month-meaning">شَهْرُ الرَّبِيعِ</div>
+            </div>
+            <div class="month-card">
+                <span class="month-number">٥</span>
+                <div class="month-name">جُمَادَى الْأُولَى</div>
+                <div class="month-meaning">شَهْرُ الْجُمَادَى</div>
+            </div>
+            <div class="month-card">
+                <span class="month-number">٦</span>
+                <div class="month-name">جُمَادَى الْآخِرَةِ</div>
+                <div class="month-meaning">شَهْرُ الْجُمَادَى</div>
+            </div>
+            <div class="month-card haram">
+                <span class="month-number">٧</span>
+                <div class="month-name">رَجَب</div>
+                <div class="month-meaning">شَهْرٌ حَرَامٌ</div>
+            </div>
+            <div class="month-card">
+                <span class="month-number">٨</span>
+                <div class="month-name">شَعْبَان</div>
+                <div class="month-meaning">شَهْرُ الْقِرَاءَةِ</div>
+            </div>
+            <div class="month-card">
+                <span class="month-number">٩</span>
+                <div class="month-name">رَمَضَان</div>
+                <div class="month-meaning">شَهْرُ الصِّيَامِ</div>
+            </div>
+            <div class="month-card">
+                <span class="month-number">١٠</span>
+                <div class="month-name">شَوَّال</div>
+                <div class="month-meaning">شَهْرُ الْعِيدِ</div>
+            </div>
+            <div class="month-card haram">
+                <span class="month-number">١١</span>
+                <div class="month-name">ذُو الْقَعْدَةِ</div>
+                <div class="month-meaning">شَهْرٌ حَرَامٌ</div>
+            </div>
+            <div class="month-card haram">
+                <span class="month-number">١٢</span>
+                <div class="month-name">ذُو الْحِجَّةِ</div>
+                <div class="month-meaning">شَهْرُ الْحَجِّ</div>
+            </div>
+        </div>
+
+        <div class="reminder-box">
+            <h3>🧠 طَرِيقَةٌ لِلْحِفْظِ</h3>
+            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 10px;">
+                <div>
+                    <p style="font-weight:700; color:#1e6b5e;">🏴 الشُّهُورُ الْحُرُمُ (٤ أَشْهُرٍ)</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top:5px;">
+                        <span style="background:#FFF3E0; padding:4px 15px; border-radius:30px; font-weight:700; color:#E65100;">مُحَرَّم</span>
+                        <span style="background:#FFF3E0; padding:4px 15px; border-radius:30px; font-weight:700; color:#E65100;">رَجَب</span>
+                        <span style="background:#FFF3E0; padding:4px 15px; border-radius:30px; font-weight:700; color:#E65100;">ذُو الْقَعْدَةِ</span>
+                        <span style="background:#FFF3E0; padding:4px 15px; border-radius:30px; font-weight:700; color:#E65100;">ذُو الْحِجَّةِ</span>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top:15px;">📌 <strong>تَذَكَّرْ:</strong> الشُّهُورُ الْحُرُمُ هِيَ: مُحَرَّم، رَجَب، ذُو الْقَعْدَةِ، ذُو الْحِجَّةِ</p>
+            <p style="margin-top:5px; font-size:0.9rem; color:#888;">✨ رَمَضَانُ هُوَ شَهْرُ الصِّيَامِ، وَذُو الْحِجَّةِ شَهْرُ الْحَجِّ</p>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    📖 تَعَلَّمْ وَتَذَكَّرْ - أَسْمَاءُ أَصَابِعِكَ وَأَشْهُرُ الْعَامِ الْهِجْرِيِّ
+</footer>
+
+</body>
+</html>

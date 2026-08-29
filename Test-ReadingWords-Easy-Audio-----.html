@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>اختبار الاستماع - قراءة الكلمات مع الحركات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fef5e7, #f0e6d2);
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+            padding: 25px 16px 45px;
+            min-height: 100vh;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(115deg, #8B5A2B, #6B3E1A);
+            padding: 20px;
+            border-radius: 70px 70px 45px 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.25);
+            border: 3px solid #FFE0A3;
+            position: relative;
+            min-height: 140px;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background: #c5e0d4;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 3px 3px 0 #4a2a0e;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #FFF2CC;
+            background: #a05e2cb3;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 60px;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .sound-indicator {
+            background: #2a8a7a;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-family: 'Tajawal';
+            margin-top: 5px;
+        }
+
+        .sound-indicator i {
+            margin-left: 5px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 55px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            border: 2px solid #efd7ae;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .score-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: #FDF5E6;
+            padding: 12px 20px;
+            border-radius: 80px;
+            margin-bottom: 25px;
+        }
+
+        .score-box {
+            background: #FFE0A3;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #5D4037;
+        }
+
+        .progress-text {
+            font-weight: 700;
+            background: #FFF3E0;
+            padding: 5px 20px;
+            border-radius: 40px;
+            color: #5D4037;
+        }
+
+        .reset-btn {
+            background: #FFCD94;
+            border: none;
+            border-radius: 60px;
+            padding: 8px 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            font-family: 'Tajawal';
+            color: #5D4037;
+        }
+
+        .reset-btn:hover {
+            background: #FFB86B;
+            transform: scale(1.02);
+        }
+
+        .question-card {
+            background: #FFFDF7;
+            border-radius: 55px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #efd7ae;
+            text-align: center;
+        }
+
+        .listen-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .listen-btn {
+            background: #1e6b5e;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 18px 40px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'Tajawal';
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 5px 0 #0f5c4f;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .listen-btn:hover {
+            transform: scale(1.03);
+            background: #2a8a7a;
+        }
+
+        .listen-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #0f5c4f;
+        }
+
+        .listen-btn i {
+            font-size: 2rem;
+        }
+
+        .listen-hint {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        .question-prompt {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #6B3E00;
+            background: #FFF8E1;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .options-area {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: #E8F0E8;
+            border: none;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Tajawal';
+            padding: 14px 8px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 3px 0 #B0C4A0;
+            color: #2C5E2C;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-2px);
+            background: #D4E4D0;
+        }
+
+        .option-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .option-btn.correct-answer {
+            background: #D4EDC9;
+            border: 2px solid #1B5E20;
+            box-shadow: 0 3px 0 #1B5E20;
+        }
+
+        .option-btn.wrong-answer {
+            background: #FFE0D4;
+            border: 2px solid #C62828;
+            box-shadow: 0 3px 0 #C62828;
+        }
+
+        .feedback-correct {
+            background: #D4EDC9;
+            color: #1E5E1E;
+            padding: 12px;
+            border-radius: 60px;
+            margin-top: 12px;
+            font-weight: bold;
+            animation: flashGreen 0.5s ease;
+        }
+
+        .feedback-wrong {
+            background: #FFE0D4;
+            color: #B13E3E;
+            padding: 12px;
+            border-radius: 60px;
+            margin-top: 12px;
+            font-weight: bold;
+            animation: flashRed 0.5s ease;
+        }
+
+        .next-btn {
+            background: #8B5A2B;
+            color: white;
+            border: none;
+            font-size: 1.1rem;
+            padding: 12px 35px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            box-shadow: 0 4px 0 #5A3A1A;
+            width: 70%;
+        }
+
+        .next-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .next-btn:hover:not(:disabled) {
+            background: #A5703E;
+            transform: translateY(-2px);
+        }
+
+        .final-result {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .player-stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 60px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .player-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #8B5A2B;
+        }
+
+        .player-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #8B5A2B;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #5D4037;
+            font-weight: 700;
+        }
+
+        @keyframes flashGreen {
+            0% { background: #D4EDC9; }
+            50% { background: #A5D6A7; }
+            100% { background: #D4EDC9; }
+        }
+
+        @keyframes flashRed {
+            0% { background: #FFE0D4; }
+            50% { background: #FFCDD2; }
+            100% { background: #FFE0D4; }
+        }
+
+        @media (max-width: 600px) {
+            .listen-btn {
+                font-size: 1.2rem;
+                padding: 12px 25px;
+            }
+            .listen-btn i {
+                font-size: 1.5rem;
+            }
+            .option-btn {
+                font-size: 1.1rem;
+                padding: 10px 5px;
+            }
+            .hero-image-container {
+                width: 60px;
+                height: 60px;
+                left: 10px;
+            }
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        .celebrate {
+            animation: bounce 0.3s ease;
+        }
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); background: #FFFDE7; }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-image-container">
+        <img src="child.jpg" alt="صورة الطفل" id="heroImage" onerror="this.style.display='none'; document.getElementById('heroImageContainer').style.display='none'">
+    </div>
+    <h1>🎧 اخْتِبَارُ الِاسْتِمَاعِ 🎧</h1>
+    <p>اسْتَمِعْ إِلَى الْكَلِمَةِ، ثُمَّ اخْتَرِ الْكَلِمَةَ الصَّحِيحَةَ</p>
+    <div style="margin-top:5px;">
+        <button class="sound-indicator" onclick="testSound()"><i class="fas fa-volume-up"></i> اختبار الصوت</button>
+    </div>
+</div>
+
+<div class="quiz-container">
+    <div class="score-area">
+        <div class="score-box">⭐ <span id="scoreValue">0</span> / <span id="totalQuestions">15</span></div>
+        <div class="progress-text"><i class="fas fa-question-circle"></i> السُّؤَالُ: <span id="currentNumber">1</span> / 15</div>
+        <button class="reset-btn" id="resetQuizBtn"><i class="fas fa-sync-alt"></i> اختبار جديد</button>
+    </div>
+
+    <div class="player-stats">
+        <img src="child.jpg" alt="صورة الطفل" class="player-avatar" id="playerAvatar" onerror="this.style.display='none'">
+        <span class="player-name">🌟 كِنَان البَطَل</span>
+        <span style="font-size:0.9rem; color:#888;">|</span>
+        <span style="font-size:0.9rem; color:#666;"><i class="fas fa-headphones" style="color:#1e6b5e;"></i> استمع واختر</span>
+    </div>
+
+    <div id="questionsContainer"></div>
+    <div style="text-align:center;"><button class="next-btn" id="nextQuestionBtn">السُّؤَالُ التَّالِي 🌟</button></div>
+    <div id="finalResultArea"></div>
+</div>
+
+<footer>
+    💡 اِضْغَطْ عَلَى زِرِّ الِاسْتِمَاعِ، ثُمَّ اخْتَرِ الْكَلِمَةَ الَّتِي سَمِعْتَهَا
+</footer>
+
+<script>
+    // قائمة الكلمات مع مسارات الصوت
+    const wordsBank = [
+        { word: "بَاب", audio: "bab.mp3", correct: "بَاب", options: ["بَاب", "بُوب", "بِيب", "بَيْت"] },
+        { word: "كَتَبَ", audio: "kataba.mp3", correct: "كَتَبَ", options: ["كَتَبَ", "كُتُب", "كِتَاب", "كَتْب"] },
+        { word: "رَجُل", audio: "rajul.mp3", correct: "رَجُل", options: ["رَجُل", "رَجَل", "رَجْل", "رُجْل"] },
+        { word: "سَمَك", audio: "samak.mp3", correct: "سَمَك", options: ["سَمَك", "سُمُك", "سِمَك", "سَمْك"] },
+        { word: "قَلَم", audio: "qalam.mp3", correct: "قَلَم", options: ["قَلَم", "قُلُم", "قِلَم", "قَلْم"] },
+        { word: "كُتُب", audio: "kutub.mp3", correct: "كُتُب", options: ["كَتَب", "كُتُب", "كِتَاب", "كُتْب"] },
+        { word: "نُور", audio: "nur.mp3", correct: "نُور", options: ["نَار", "نُور", "نِير", "نَوْر"] },
+        { word: "بِئْر", audio: "bir.mp3", correct: "بِئْر", options: ["بَأْر", "بُور", "بِئْر", "بَيْر"] },
+        { word: "كِتَاب", audio: "kitab.mp3", correct: "كِتَاب", options: ["كَتَب", "كُتُب", "كِتَاب", "كِتْب"] },
+        { word: "مِفْتَاح", audio: "miftah.mp3", correct: "مِفْتَاح", options: ["مَفْتُوح", "مُفْتَاح", "مِفْتَاح", "مِفْتْح"] },
+        { word: "بَيْت", audio: "bayt.mp3", correct: "بَيْت", options: ["بَات", "بُوت", "بِيت", "بَيْت"] },
+        { word: "شَمْس", audio: "shams.mp3", correct: "شَمْس", options: ["شَمَس", "شُمُس", "شِمْس", "شَمْس"] },
+        { word: "قَمَر", audio: "qamar.mp3", correct: "قَمَر", options: ["قَمْر", "قُمُر", "قِمِر", "قَمَر"] },
+        { word: "مَدْرَسَة", audio: "madrasa.mp3", correct: "مَدْرَسَة", options: ["مَدْرَسْ", "مِدْرَسَة", "مُدْرَسَة", "مَدْرَسَة"] },
+        { word: "جَمِيل", audio: "jamil.mp3", correct: "جَمِيل", options: ["جَمَال", "جُمُول", "جِمِيل", "جَمِيل"] }
+    ];
+
+    // تسجيل الصوت للتغذية الراجعة
+    const soundFiles = {
+        correct: 'correct.mp3',
+        wrong: 'wrong.mp3'
+    };
+
+    function playSound(type) {
+        const file = soundFiles[type];
+        if (!file) return;
+        const audio = new Audio(file);
+        audio.play().catch(e => console.log('الصوت غير متاح:', e));
+    }
+
+    function testSound() {
+        playSound('correct');
+        setTimeout(() => playSound('wrong'), 1200);
+    }
+
+    let currentQuestions = [];
+    let userAnswers = [];
+    let currentIndex = 0;
+    let quizFinished = false;
+
+    const container = document.getElementById('questionsContainer');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const resetBtn = document.getElementById('resetQuizBtn');
+    const scoreSpan = document.getElementById('scoreValue');
+    const totalSpan = document.getElementById('totalQuestions');
+    const currentNumberSpan = document.getElementById('currentNumber');
+    const finalDiv = document.getElementById('finalResultArea');
+
+    function getRandomQuestions(arr, count = 15) {
+        let shuffled = [...arr];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled.slice(0, count);
+    }
+
+    function playWordAudio(audioFile) {
+        if (!audioFile) return;
+        const audio = new Audio(audioFile);
+        audio.play().catch(e => console.log('الصوت غير متاح:', e));
+    }
+
+    function renderCurrentQuestion() {
+        if (currentIndex >= currentQuestions.length) {
+            if (!quizFinished) finishQuiz();
+            return;
+        }
+        const q = currentQuestions[currentIndex];
+        const saved = userAnswers[currentIndex];
+
+        let html = `
+            <div class="question-card" id="qCard">
+                <div class="listen-area">
+                    <button class="listen-btn" id="listenBtn" onclick="playWordAudio('${q.audio}')">
+                        <i class="fas fa-headphones"></i> اسْتَمِعْ
+                    </button>
+                    <div class="listen-hint">👆 اِضْغَطْ لِتَسْمَعَ الْكَلِمَةَ</div>
+                </div>
+                <div class="question-prompt">🔍 اخْتَرِ الْكَلِمَةَ الَّتِي سَمِعْتَهَا:</div>
+                <div class="options-area" id="optsArea">
+        `;
+        // خلط الخيارات
+        let shuffledOptions = [...q.options];
+        for (let i = shuffledOptions.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+        }
+        shuffledOptions.forEach(opt => {
+            html += `<button class="option-btn" data-opt="${opt}">${opt}</button>`;
+        });
+        html += `</div><div id="fbMsg" class="feedback-message"></div></div>`;
+        container.innerHTML = html;
+        currentNumberSpan.innerText = currentIndex + 1;
+
+        const btns = document.querySelectorAll('.option-btn');
+        const fbDiv = document.getElementById('fbMsg');
+
+        if (saved) {
+            // عرض النتيجة السابقة
+            const correctAnswer = saved.correctAnswer;
+            btns.forEach(btn => {
+                btn.disabled = true;
+                const opt = btn.getAttribute('data-opt');
+                if (opt === correctAnswer) {
+                    btn.classList.add('correct-answer');
+                } else if (opt === saved.selected && !saved.isCorrect) {
+                    btn.classList.add('wrong-answer');
+                }
+            });
+            if (saved.isCorrect) {
+                fbDiv.innerHTML = `<div class="feedback-correct">✅ صَحِيحٌ! الْكَلِمَةُ هِيَ: ${correctAnswer}</div>`;
+            } else {
+                fbDiv.innerHTML = `<div class="feedback-wrong">❌ لَيْسَ صَحِيحًا. الْكَلِمَةُ الصَّحِيحَةُ هِيَ: ${correctAnswer}</div>`;
+            }
+            nextBtn.disabled = false;
+        } else {
+            btns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    if (quizFinished) return;
+                    const selected = btn.getAttribute('data-opt');
+                    const isCorrect = (selected === q.correct);
+                    userAnswers[currentIndex] = { isCorrect, selected, correctAnswer: q.correct };
+
+                    // تشغيل الصوت
+                    if (isCorrect) {
+                        playSound('correct');
+                        fbDiv.innerHTML = `<div class="feedback-correct">✅ أَحْسَنْتَ! الْكَلِمَةُ هِيَ: ${q.correct}</div>`;
+                        document.getElementById('qCard')?.classList.add('celebrate');
+                        setTimeout(() => document.getElementById('qCard')?.classList.remove('celebrate'), 400);
+                    } else {
+                        playSound('wrong');
+                        fbDiv.innerHTML = `<div class="feedback-wrong">❌ لَيْسَ صَحِيحًا. الْكَلِمَةُ الصَّحِيحَةُ هِيَ: ${q.correct}</div>`;
+                    }
+
+                    // تمييز الإجابات
+                    btns.forEach(b => {
+                        b.disabled = true;
+                        const opt = b.getAttribute('data-opt');
+                        if (opt === q.correct) {
+                            b.classList.add('correct-answer');
+                        } else if (opt === selected && !isCorrect) {
+                            b.classList.add('wrong-answer');
+                        }
+                    });
+
+                    nextBtn.disabled = false;
+                    updateStats();
+                });
+            });
+        }
+    }
+
+    function updateStats() {
+        let correct = userAnswers.filter(a => a && a.isCorrect === true).length;
+        scoreSpan.innerText = correct;
+        totalSpan.innerText = currentQuestions.length;
+    }
+
+    function finishQuiz() {
+        quizFinished = true;
+        let total = currentQuestions.length;
+        let correct = userAnswers.filter(a => a && a.isCorrect === true).length;
+        let percent = (correct / total) * 100;
+        let msg = "";
+        let bgColor = "";
+        if (percent >= 85) {
+            msg = "🏆 مُمْتَازٌ يَا كِنَان! أَتْقَنْتَ قِرَاءَةَ الْكَلِمَاتِ مَعَ الْحَرَكَاتِ! أَنْتَ بَطَلٌ!";
+            bgColor = "#C8E6C9";
+        } else if (percent >= 65) {
+            msg = "📚 جَيِّدٌ جِدًّا! زَاوِلِ الْكَلِمَاتِ الَّتِي وَجَدْتَ صُعُوبَةً فِيهَا.";
+            bgColor = "#FFF9C4";
+        } else if (percent >= 45) {
+            msg = "📖 جَيِّدٌ! كُرِّرِ الِاسْتِمَاعَ إِلَى الْكَلِمَاتِ وَسَتَتَحَسَّنُ بِسُرْعَةٍ.";
+            bgColor = "#FFE0B2";
+        } else {
+            msg = "💪 لَا تَقْلَقْ يَا كِنَان! اسْتَمِعْ إِلَى الْكَلِمَاتِ مَرَّةً أُخْرَى مَعَ أُمِّكَ وَسَتَتَمَكَّنُ بِإِذْنِ اللَّهِ.";
+            bgColor = "#FFCDD2";
+        }
+        finalDiv.innerHTML = `
+            <div class="final-result" style="background:${bgColor};">
+                ⭐ ${msg} ⭐<br>
+                نَتَيْجَتُكَ: ${correct} مِنْ ${total}<br>
+                ✨ وَاصِلِ التَّدْرِيبَ لِتُصْبِحَ قَارِئًا مَاهِرًا ✨
+            </div>
+        `;
+        nextBtn.disabled = true;
+    }
+
+    function nextQuestion() {
+        if (quizFinished) return;
+        if (currentIndex < currentQuestions.length - 1) {
+            if (!userAnswers[currentIndex]) {
+                let fbDiv = document.querySelector('.feedback-message');
+                if (fbDiv) fbDiv.innerHTML = `<span style="color:#c0392b;">⚠️ اسْتَمِعْ إِلَى الْكَلِمَةِ وَاخْتَرِ الإِجَابَةَ أَوَّلًا ⚠️</span>`;
+                return;
+            }
+            currentIndex++;
+            renderCurrentQuestion();
+        } else {
+            if (!userAnswers[currentIndex]) {
+                let fbDiv = document.querySelector('.feedback-message');
+                if (fbDiv) fbDiv.innerHTML = `<span style="color:#c0392b;">⚠️ أَجِبْ عَنِ السُّؤَالِ قَبْلَ الاِنْتِهَاءِ ⚠️</span>`;
+                return;
+            }
+            if (!quizFinished) finishQuiz();
+        }
+    }
+
+    function resetQuiz() {
+        currentQuestions = getRandomQuestions(wordsBank, 15);
+        userAnswers = new Array(currentQuestions.length);
+        currentIndex = 0;
+        quizFinished = false;
+        nextBtn.disabled = false;
+        finalDiv.innerHTML = '';
+        renderCurrentQuestion();
+        updateStats();
+    }
+
+    function init() {
+        currentQuestions = getRandomQuestions(wordsBank, 15);
+        userAnswers = new Array(currentQuestions.length);
+        currentIndex = 0;
+        quizFinished = false;
+        renderCurrentQuestion();
+        updateStats();
+        nextBtn.onclick = nextQuestion;
+        resetBtn.onclick = resetQuiz;
+    }
+    init();
+</script>
+</body>
+</html>

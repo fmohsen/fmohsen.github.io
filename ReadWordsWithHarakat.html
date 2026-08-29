@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>درس قراءة الكلمات مع الحركات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fef5e7, #f0e6d2);
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+            padding: 25px 16px 45px;
+            min-height: 100vh;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(115deg, #8B5A2B, #6B3E1A);
+            padding: 20px;
+            border-radius: 70px 70px 45px 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.25);
+            border: 3px solid #FFE0A3;
+            position: relative;
+            min-height: 140px;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background: #c5e0d4;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 3px 3px 0 #4a2a0e;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #FFF2CC;
+            background: #a05e2cb3;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 60px;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .lesson-container {
+            background: white;
+            border-radius: 55px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            border: 2px solid #efd7ae;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #8B5A2B;
+            background: #FFF3DF;
+            display: inline-block;
+            padding: 6px 25px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .rule-box {
+            background: #FFFBF0;
+            border-radius: 40px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-right: 8px solid #FFB347;
+        }
+
+        .rule-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5D4037;
+        }
+
+        .haraka-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .haraka-card {
+            background: #FFFDF7;
+            border-radius: 40px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #FFE0A3;
+        }
+
+        .haraka-symbol {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #8B5A2B;
+        }
+
+        .haraka-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #5D4037;
+            margin-top: 5px;
+        }
+
+        .haraka-example {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1B5E20;
+            background: #F1F8E9;
+            padding: 4px 12px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        /* قسم الكلمات */
+        .word-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #efd7ae;
+        }
+
+        .word-section-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #8B5A2B;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .word-card {
+            background: #FFFDF7;
+            border-radius: 40px;
+            padding: 15px 10px;
+            text-align: center;
+            border: 2px solid #e0e8e0;
+            transition: transform 0.2s;
+            cursor: default;
+        }
+
+        .word-card:hover {
+            transform: scale(1.03);
+            border-color: #8B5A2B;
+        }
+
+        .word-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e6b5e;
+            letter-spacing: 2px;
+        }
+
+        .reading-rating {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .reading-rating button {
+            background: #F1F8E9;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .reading-rating button:hover {
+            transform: scale(1.15);
+            background: #FFE0A3;
+        }
+
+        .reading-rating button.selected {
+            background: #FFE0A3;
+            box-shadow: 0 0 0 2px #8B5A2B;
+            transform: scale(1.1);
+        }
+
+        .reading-rating .great { color: #1B5E20; }
+        .reading-rating .good { color: #F57F17; }
+        .reading-rating .ok { color: #E65100; }
+        .reading-rating .try { color: #C62828; }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #5D4037;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-item .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-great { background: #1B5E20; }
+        .dot-good { background: #F57F17; }
+        .dot-ok { background: #E65100; }
+        .dot-try { background: #C62828; }
+
+        .progress-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: #FDF5E6;
+            padding: 12px 20px;
+            border-radius: 80px;
+            margin-top: 20px;
+        }
+
+        .progress-text {
+            font-weight: 700;
+            color: #5D4037;
+        }
+
+        .reset-btn {
+            background: #FFCD94;
+            border: none;
+            border-radius: 60px;
+            padding: 8px 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            font-family: 'Tajawal';
+            color: #5D4037;
+        }
+
+        .reset-btn:hover {
+            background: #FFB86B;
+            transform: scale(1.02);
+        }
+
+        .final-message {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #5D4037;
+            font-weight: 700;
+        }
+
+        .sound-icon {
+            color: #1e6b5e;
+            margin: 0 5px;
+        }
+
+        @media (max-width: 600px) {
+            .word-text {
+                font-size: 1.4rem;
+            }
+            .haraka-symbol {
+                font-size: 2rem;
+            }
+            .hero-image-container {
+                width: 60px;
+                height: 60px;
+                left: 10px;
+            }
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+            .word-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-image-container">
+        <img src="child.jpg" alt="صورة الطفل" id="heroImage" onerror="this.style.display='none'; document.getElementById('heroImageContainer').style.display='none'">
+    </div>
+    <h1>📖 قِرَاءَةُ الْكَلِمَاتِ مَعَ الْحَرَكَاتِ</h1>
+    <p>تَعَلَّمْ قِرَاءَةَ الْكَلِمَاتِ بِالْفَتْحَةِ وَالضَّمَّةِ وَالْكَسْرَةِ وَالسُّكُونِ</p>
+</div>
+
+<div class="lesson-container">
+    <!-- ===== مراجعة الحركات ===== -->
+    <div class="section-title"><i class="fas fa-graduation-cap"></i> مُرَاجَعَةُ الْحَرَكَاتِ</div>
+
+    <div class="rule-box">
+        <div class="rule-text">
+            <p><strong>الْحَرَكَاتُ</strong> هِيَ عَلَامَاتٌ تُوضَعُ عَلَى الْحُرُوفِ لِنَعْرِفَ كَيْفَ نَنْطُقُهَا.</p>
+        </div>
+    </div>
+
+    <div class="haraka-grid">
+        <div class="haraka-card">
+            <div class="haraka-symbol">◌َ</div>
+            <div class="haraka-name">الْفَتْحَة</div>
+            <div class="haraka-example">بَ</div>
+            <div style="font-size:0.8rem; color:#888;">(بَاءٌ مَفْتُوحَةٌ)</div>
+        </div>
+        <div class="haraka-card">
+            <div class="haraka-symbol">◌ُ</div>
+            <div class="haraka-name">الضَّمَّة</div>
+            <div class="haraka-example">بُ</div>
+            <div style="font-size:0.8rem; color:#888;">(بَاءٌ مَضْمُومَةٌ)</div>
+        </div>
+        <div class="haraka-card">
+            <div class="haraka-symbol">◌ِ</div>
+            <div class="haraka-name">الْكَسْرَة</div>
+            <div class="haraka-example">بِ</div>
+            <div style="font-size:0.8rem; color:#888;">(بَاءٌ مَكْسُورَةٌ)</div>
+        </div>
+        <div class="haraka-card">
+            <div class="haraka-symbol">◌ْ</div>
+            <div class="haraka-name">السُّكُون</div>
+            <div class="haraka-example">بْ</div>
+            <div style="font-size:0.8rem; color:#888;">(بَاءٌ سَاكِنَةٌ)</div>
+        </div>
+        <div class="haraka-card">
+            <div class="haraka-symbol">◌ً ◌ٌ ◌ٍ</div>
+            <div class="haraka-name">التَّنْوِين</div>
+            <div class="haraka-example">بً بٌ بٍ</div>
+            <div style="font-size:0.8rem; color:#888;">(بَاءٌ مُنَوَّنَةٌ)</div>
+        </div>
+    </div>
+
+    <!-- ===== الكلمات ===== -->
+    <div class="word-section">
+        <div class="word-section-title">
+            <i class="fas fa-pen-fancy"></i> كَلِمَاتٌ لِلْقِرَاءَةِ
+            <span style="font-size:0.8rem; font-weight:400; color:#888;">(قَيِّمْ قِرَاءَتَكَ بَعْدَ كُلِّ كَلِمَةٍ)</span>
+        </div>
+
+        <div id="wordsContainer">
+            <!-- سيتم إنشاء الكلمات بواسطة JavaScript -->
+        </div>
+
+        <div class="legend">
+            <span class="legend-item"><span class="dot dot-great"></span> مُمْتَاز</span>
+            <span class="legend-item"><span class="dot dot-good"></span> جَيِّد</span>
+            <span class="legend-item"><span class="dot dot-ok"></span> وَسَط</span>
+            <span class="legend-item"><span class="dot dot-try"></span> أَحْتَاجُ مُزَاوَلَةً</span>
+        </div>
+    </div>
+
+    <!-- ===== التقدم ===== -->
+    <div class="progress-area">
+        <div class="progress-text">
+            <i class="fas fa-check-circle" style="color:#1e6b5e;"></i>
+            قُمْتَ بِقِرَاءَةِ <span id="readCount">0</span> / <span id="totalCount">0</span> كَلِمَةً
+        </div>
+        <button class="reset-btn" id="resetBtn"><i class="fas fa-undo-alt"></i> إِعَادَةُ التَّدْرِيبِ</button>
+    </div>
+
+    <!-- ===== النتيجة ===== -->
+    <div id="resultContainer"></div>
+</div>
+
+<footer>
+    💡 اِقْرَأِ الْكَلِمَةَ، ثُمَّ اضْغَطْ عَلَى الْوَجْهِ الَّذِي يُعَبِّرُ عَنْ قِرَاءَتِكَ
+</footer>
+
+<script>
+    // قائمة الكلمات مع حركاتها
+    const wordsData = [
+        // فتحة
+        { word: "بَاب", haraka: "فَتْحَة" },
+        { word: "كَتَبَ", haraka: "فَتْحَة" },
+        { word: "رَجُل", haraka: "فَتْحَة" },
+        { word: "سَمَك", haraka: "فَتْحَة" },
+        { word: "قَلَم", haraka: "فَتْحَة" },
+        // ضمة
+        { word: "كُتُب", haraka: "ضَمَّة" },
+        { word: "سُكَّر", haraka: "ضَمَّة" },
+        { word: "نُور", haraka: "ضَمَّة" },
+        { word: "قُطْن", haraka: "ضَمَّة" },
+        { word: "رُمَّان", haraka: "ضَمَّة" },
+        // كسرة
+        { word: "بِئْر", haraka: "كَسْرَة" },
+        { word: "كِتَاب", haraka: "كَسْرَة" },
+        { word: "مِفْتَاح", haraka: "كَسْرَة" },
+        { word: "جِسْر", haraka: "كَسْرَة" },
+        { word: "فِيل", haraka: "كَسْرَة" },
+        // سكون
+        { word: "بَيْت", haraka: "سُكُون" },
+        { word: "نَجْم", haraka: "سُكُون" },
+        { word: "شَمْس", haraka: "سُكُون" },
+        { word: "قَمَر", haraka: "سُكُون" },
+        { word: "أَسَد", haraka: "سُكُون" },
+        // تنوين
+        { word: "قَلَمٌ", haraka: "تَنْوِين" },
+        { word: "كِتَابٌ", haraka: "تَنْوِين" },
+        { word: "مَاءٌ", haraka: "تَنْوِين" },
+        { word: "شَجَرَةٌ", haraka: "تَنْوِين" },
+        { word: "زَهْرَةٌ", haraka: "تَنْوِين" },
+        // كلمات مختلطة
+        { word: "مَدْرَسَة", haraka: "مُخْتَلِطَة" },
+        { word: "مُسْلِم", haraka: "مُخْتَلِطَة" },
+        { word: "مِصْبَاح", haraka: "مُخْتَلِطَة" },
+        { word: "بُسْتَان", haraka: "مُخْتَلِطَة" },
+        { word: "جَمِيل", haraka: "مُخْتَلِطَة" }
+    ];
+
+    let ratings = [];
+    let totalWords = wordsData.length;
+    let allRated = false;
+
+    const container = document.getElementById('wordsContainer');
+    const readCountSpan = document.getElementById('readCount');
+    const totalCountSpan = document.getElementById('totalCount');
+    const resetBtn = document.getElementById('resetBtn');
+    const resultContainer = document.getElementById('resultContainer');
+
+    totalCountSpan.textContent = totalWords;
+
+    function renderWords() {
+        container.innerHTML = '';
+        wordsData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'word-card';
+            card.id = `word-${index}`;
+
+            const wordText = document.createElement('div');
+            wordText.className = 'word-text';
+            wordText.textContent = item.word;
+
+            const ratingDiv = document.createElement('div');
+            ratingDiv.className = 'reading-rating';
+
+            const ratingValue = ratings[index] || 0;
+
+            const emojis = [
+                { value: 'great', emoji: '😄', label: 'ممتاز' },
+                { value: 'good', emoji: '🙂', label: 'جيد' },
+                { value: 'ok', emoji: '😐', label: 'وسط' },
+                { value: 'try', emoji: '😢', label: 'أحتاج مزاولة' }
+            ];
+
+            emojis.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = `rating-btn ${opt.value}`;
+                if (ratingValue === opt.value) btn.classList.add('selected');
+                btn.dataset.value = opt.value;
+                btn.textContent = opt.emoji;
+                btn.title = opt.label;
+
+                btn.addEventListener('click', () => {
+                    setRating(index, opt.value);
+                });
+
+                ratingDiv.appendChild(btn);
+            });
+
+            card.appendChild(wordText);
+            card.appendChild(ratingDiv);
+            container.appendChild(card);
+        });
+        updateProgress();
+    }
+
+    function setRating(index, value) {
+        ratings[index] = value;
+        const card = document.getElementById(`word-${index}`);
+        const btns = card.querySelectorAll('.rating-btn');
+        btns.forEach(btn => {
+            btn.classList.remove('selected');
+            if (btn.dataset.value === value) {
+                btn.classList.add('selected');
+            }
+        });
+        updateProgress();
+        checkAllRated();
+    }
+
+    function updateProgress() {
+        const rated = ratings.filter(r => r !== undefined && r !== 0).length;
+        readCountSpan.textContent = rated;
+    }
+
+    function checkAllRated() {
+        const rated = ratings.filter(r => r !== undefined && r !== 0).length;
+        if (rated === totalWords && !allRated) {
+            allRated = true;
+            showFinalResult();
+        }
+    }
+
+    function showFinalResult() {
+        const great = ratings.filter(r => r === 'great').length;
+        const good = ratings.filter(r => r === 'good').length;
+        const ok = ratings.filter(r => r === 'ok').length;
+        const tryCount = ratings.filter(r => r === 'try').length;
+
+        let msg = '';
+        let bgColor = '';
+        if (great >= totalWords * 0.7) {
+            msg = '🏆 مُمْتَازٌ! قِرَاءَتُكَ رَائِعَةٌ جِدًّا! أَنْتَ قَارِئٌ مَاهِرٌ!';
+            bgColor = '#C8E6C9';
+        } else if (great >= totalWords * 0.4) {
+            msg = '📚 جَيِّدٌ جِدًّا! وَاصِلِ التَّدْرِيبَ لِتُصْبِحَ أَفْضَلَ.';
+            bgColor = '#FFF9C4';
+        } else if (great + good >= totalWords * 0.5) {
+            msg = '📖 جَيِّدٌ! كُرِّرِ الْكَلِمَاتِ الَّتِي وَجَدْتَ صُعُوبَةً فِيهَا.';
+            bgColor = '#FFE0B2';
+        } else {
+            msg = '💪 لَا تَقْلَقْ! كُلُّ بِدَايَةٍ صَعْبَةٌ. كَرِّرِ الْكَلِمَاتِ مَعَ أُمِّكَ وَسَتَتَحَسَّنُ بِإِذْنِ اللَّهِ.';
+            bgColor = '#FFCDD2';
+        }
+
+        resultContainer.innerHTML = `
+            <div class="final-message" style="background:${bgColor};">
+                ⭐ ${msg} ⭐<br>
+                <span style="font-size:0.9rem;">
+                    😄 مُمْتَاز: ${great} &nbsp;|&nbsp;
+                    🙂 جَيِّد: ${good} &nbsp;|&nbsp;
+                    😐 وَسَط: ${ok} &nbsp;|&nbsp;
+                    😢 أَحْتَاجُ مُزَاوَلَةً: ${tryCount}
+                </span>
+            </div>
+        `;
+    }
+
+    function resetPractice() {
+        ratings = [];
+        allRated = false;
+        resultContainer.innerHTML = '';
+        renderWords();
+        updateProgress();
+    }
+
+    resetBtn.addEventListener('click', resetPractice);
+
+    // تهيئة الصفحة
+    renderWords();
+</script>
+</body>
+</html>

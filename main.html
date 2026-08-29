@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>صفحة التعلم الرئيسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e8f0fe, #d9e6f5);
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+            padding: 25px 16px 45px;
+            min-height: 100vh;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(115deg, #1e6b5e, #0f5c4f);
+            padding: 20px;
+            border-radius: 70px 70px 45px 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.25);
+            border: 3px solid #FFE0A3;
+            position: relative;
+            min-height: 140px;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background: #c5e0d4;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 3px 3px 0 #0b4b3a;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #FFF2CC;
+            background: #2a8a7ab3;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 60px;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .welcome-name {
+            color: #FFE0A3;
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        /* أقسام المواد */
+        .branch-section {
+            background: white;
+            border-radius: 55px;
+            padding: 25px;
+            margin-bottom: 35px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            border: 2px solid #c5e0d4;
+        }
+
+        .branch-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 60px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .branch-islamic .branch-title {
+            background: linear-gradient(115deg, #1B5E20, #0D5302);
+        }
+
+        .branch-arabic .branch-title {
+            background: linear-gradient(115deg, #8B5A2B, #6B3E1A);
+        }
+
+        .assessment-link {
+            background: #FFE0A3;
+            border-radius: 60px;
+            padding: 8px 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 800;
+            color: #5D4037;
+        }
+
+        .assessment-link i {
+            color: #1e6b5e;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .topic-card {
+            background: #FFFDF7;
+            border-radius: 40px;
+            padding: 18px;
+            border: 2px solid #e0e8e0;
+            transition: transform 0.2s;
+        }
+
+        .topic-card:hover {
+            transform: scale(1.02);
+            border-color: #1e6b5e;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #e0e8e0;
+        }
+
+        .topic-icon {
+            font-size: 2rem;
+        }
+
+        .topic-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1e6b5e;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .activity-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #F1F8E9;
+            padding: 8px 15px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #2C5E2C;
+            font-weight: 700;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .activity-link:hover {
+            background: #D4E4D0;
+            transform: translateX(-5px);
+        }
+
+        .activity-link i {
+            font-size: 1.1rem;
+            color: #1e6b5e;
+            width: 25px;
+            text-align: center;
+        }
+
+        .activity-link.quiz i {
+            color: #E65100;
+        }
+
+        .activity-link.lesson i {
+            color: #1E88E5;
+        }
+
+        .activity-link.assessment i {
+            color: #F9A825;
+        }
+
+        .activity-link.self-eval i {
+            color: #8E24AA;
+        }
+
+        .activity-link.reading i {
+            color: #00897B;
+        }
+
+        .activity-link.practice i {
+            color: #6D4C41;
+        }
+
+        .self-eval-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #E8EAF6;
+            border-radius: 60px;
+            border: 2px solid #C5CAE9;
+        }
+
+        .self-eval-section .activity-link {
+            display: inline-flex;
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            background: #8E24AA;
+            color: white;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: 0.2s;
+        }
+
+        .self-eval-section .activity-link:hover {
+            background: #6A1B9A;
+            transform: scale(1.02);
+        }
+
+        .self-eval-section .activity-link i {
+            color: white;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 30px;
+            color: #5D4037;
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .hero-image-container {
+                width: 60px;
+                height: 60px;
+                left: 10px;
+            }
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+            .branch-title {
+                font-size: 1.3rem;
+                padding: 6px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-image-container">
+        <img src="child.jpg" alt="صورة الطفل" id="heroImage" onerror="this.style.display='none'; document.getElementById('heroImageContainer').style.display='none'">
+    </div>
+    <h1>📚 مَرْكَزُ التَّعَلُّمِ 📚</h1>
+    <p>اِخْتَرِ الْمَوْضُوعَ الَّذِي تُرِيدُ مُرَاجَعَتَهُ</p>
+    <div class="welcome-name">🌟 أَهْلًا بِكَ يَا بَطَلِي!</div>
+</div>
+
+<!-- ====================== القسم الأول: Islamic Teachings ====================== -->
+<div class="branch-section branch-islamic">
+    <div class="branch-title">🕌 التَّعْلِيمُ الإِسْلَامِيُّ</div>
+
+    <!-- رابط التقييم الشامل للفرع -->
+    <div class="assessment-link">
+        <i class="fas fa-clipboard-check"></i> التَّقْيِيمُ الشَّامِلُ لِلتَّعْلِيمِ الإِسْلَامِيّ
+    </div>
+
+    <div class="topic-grid">
+        <!-- القرآن الكريم -->
+        <div class="topic-card">
+            <div class="topic-header">
+                <span class="topic-icon">📖</span>
+                <span class="topic-name">الْقُرْآنُ الْكَرِيمُ</span>
+            </div>
+            <div class="activity-list">
+                <a href="#" class="activity-link lesson"><i class="fas fa-book"></i> حِفْظُ السُّوَرِ (دَرْس)</a>
+                <a href="quran_test.html" class="activity-link quiz"><i class="fas fa-pen-fancy"></i> اخْتِبَارُ السُّوَرِ</a>
+                <a href="#" class="activity-link practice"><i class="fas fa-redo-alt"></i> مُرَاجَعَةُ السُّوَرِ</a>
+            </div>
+        </div>
+
+        <!-- السنة النبوية -->
+        <div class="topic-card">
+            <div class="topic-header">
+                <span class="topic-icon">📚</span>
+                <span class="topic-name">السُّنَّةُ النَّبَوِيَّةُ</span>
+            </div>
+            <div class="activity-list">
+                <a href="#" class="activity-link lesson"><i class="fas fa-book"></i> حِفْظُ الْأَحَادِيثِ (دَرْس)</a>
+                <a href="#" class="activity-link quiz"><i class="fas fa-pen-fancy"></i> اخْتِبَارُ الْأَحَادِيثِ</a>
+                <a href="#" class="activity-link practice"><i class="fas fa-redo-alt"></i> مُرَاجَعَةُ الْأَحَادِيثِ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ====================== القسم الثاني: Arabic Language ====================== -->
+<div class="branch-section branch-arabic">
+    <div class="branch-title">🌍 اللُّغَةُ الْعَرَبِيَّةُ</div>
+
+    <!-- رابط التقييم الشامل للفرع -->
+    <div class="assessment-link">
+        <i class="fas fa-clipboard-check"></i> التَّقْيِيمُ الشَّامِلُ لِلُّغَةِ الْعَرَبِيَّةِ
+    </div>
+
+    <div class="topic-grid">
+        <!-- المفردات -->
+        <div class="topic-card">
+            <div class="topic-header">
+                <span class="topic-icon">📝</span>
+                <span class="topic-name">الْمُفْرَدَاتُ (كَلِمَاتٌ)</span>
+            </div>
+            <div class="activity-list">
+                <a href="#" class="activity-link lesson"><i class="fas fa-book"></i> الْمُفْرَدَاتُ الْأَسَاسِيَّةُ (دَرْس)</a>
+                <a href="vocabulary_test.html" class="activity-link quiz"><i class="fas fa-pen-fancy"></i> اخْتِبَارُ الْمُفْرَدَاتِ</a>
+                <a href="#" class="activity-link practice"><i class="fas fa-redo-alt"></i> تَدْرِيبُ الْكَلِمَاتِ</a>
+            </div>
+        </div>
+
+        <!-- القراءة والفهم -->
+        <div class="topic-card">
+            <div class="topic-header">
+                <span class="topic-icon">📖</span>
+                <span class="topic-name">الْقِرَاءَةُ وَالْفَهْمُ</span>
+            </div>
+            <div class="activity-list">
+                <a href="#" class="activity-link lesson"><i class="fas fa-book"></i> دُرُوسُ الْقِرَاءَةِ</a>
+                <a href="reading_test.html" class="activity-link quiz"><i class="fas fa-pen-fancy"></i> اخْتِبَارُ الْفَهْمِ الْقِرَائِيّ</a>
+                <a href="#" class="activity-link reading"><i class="fas fa-book-open"></i> نُصُوصٌ قَصِيرَةٌ</a>
+            </div>
+        </div>
+
+        <!-- القواعد النحوية -->
+        <div class="topic-card">
+            <div class="topic-header">
+                <span class="topic-icon">🔗</span>
+                <span class="topic-name">الْقَوَاعِدُ النَّحْوِيَّةُ</span>
+            </div>
+            <div class="activity-list">
+                <a href="#" class="activity-link lesson"><i class="fas fa-book"></i> ضَمَائِرُ الْغَائِبِ (دَرْس)</a>
+                <a href="pronouns_test.html" class="activity-link quiz"><i class="fas fa-pen-fancy"></i> اخْتِبَارُ الضَّمَائِرِ</a>
+                <a href="#" class="activity-link lesson"><i class="fas fa-book"></i> حُرُوفُ الْجَرِّ (دَرْس)</a>
+                <a href="prepositions_test.html" class="activity-link quiz"><i class="fas fa-pen-fancy"></i> اخْتِبَارُ حُرُوفِ الْجَرِّ</a>
+            </div>
+        </div>
+
+        <!-- الأفعال -->
+        <div class="topic-card">
+            <div class="topic-header">
+                <span class="topic-icon">🏃</span>
+                <span class="topic-name">الْأَفْعَالُ</span>
+            </div>
+            <div class="activity-list">
+                <a href="#" class="activity-link lesson"><i class="fas fa-book"></i> الْأَفْعَالُ (دَرْس)</a>
+                <a href="#" class="activity-link quiz"><i class="fas fa-pen-fancy"></i> اخْتِبَارُ الْأَفْعَالِ</a>
+                <a href="#" class="activity-link practice"><i class="fas fa-redo-alt"></i> تَدْرِيبُ الْأَفْعَالِ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ====================== التقييم الذاتي ====================== -->
+<div class="self-eval-section">
+    <div style="font-size:1.3rem; font-weight:800; color:#4A148C; margin-bottom:15px;">
+        📋 التَّقْيِيمُ الذَّاتِيّ
+    </div>
+    <p style="color:#5D4037; margin-bottom:15px;">
+        قَيِّمْ نَفْسَكَ وَاعْرِفْ مَا الَّذِي تَتَذَكَّرُهُ وَمَا تَحْتَاجُ إِلَى مُرَاجَعَتِهِ
+    </p>
+    <a href="self_evaluation.html" class="activity-link self-eval">
+        <i class="fas fa-star"></i> اذْهَبْ إِلَى التَّقْيِيمِ الذَّاتِيّ
+    </a>
+</div>
+
+<!-- ====================== روابط إضافية ====================== -->
+<div class="footer-links">
+    <p>📌 سَتُضَافُ الْمَزِيدُ مِنَ الدُّرُوسِ وَالِاخْتِبَارَاتِ قَرِيبًا إِنْ شَاءَ اللَّهُ</p>
+</div>
+
+<footer style="text-align:center; margin-top:30px; color:#5D4037; font-weight:700;">
+    💡 اِخْتَرِ الْمَوْضُوعَ، ثُمَّ انْقُرْ عَلَى النَّشَاطِ الَّذِي تُرِيدُهُ
+</footer>
+
+<script>
+    // لتحديث روابط الصفحات عند الحاجة
+    console.log('مركز التعلم - يمكنك إضافة روابط جديدة هنا');
+</script>
+</body>
+</html>
