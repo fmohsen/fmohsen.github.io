@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>اختبار شامل - كنان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e8f0e8, #d4e4d0);
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+            padding: 25px 16px 45px;
+            min-height: 100vh;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(115deg, #1B5E20, #0D5302);
+            padding: 20px;
+            border-radius: 70px 70px 45px 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.25);
+            border: 3px solid #FFE0A3;
+            position: relative;
+            min-height: 140px;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background: #c5e0d4;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 3px 3px 0 #0a3a0a;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #FFF2CC;
+            background: #2E7D32b3;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 60px;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .sound-indicator {
+            background: #2a8a7a;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-family: 'Tajawal';
+            margin-top: 5px;
+        }
+
+        .sound-indicator i {
+            margin-left: 5px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 55px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            border: 2px solid #C8E6C9;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .score-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: #E8F5E9;
+            padding: 12px 20px;
+            border-radius: 80px;
+            margin-bottom: 25px;
+        }
+
+        .score-box {
+            background: #FFE0A3;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #5D4037;
+        }
+
+        .progress-text {
+            font-weight: 700;
+            background: #FFF3E0;
+            padding: 5px 20px;
+            border-radius: 40px;
+            color: #5D4037;
+        }
+
+        .reset-btn {
+            background: #FFCD94;
+            border: none;
+            border-radius: 60px;
+            padding: 8px 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            font-family: 'Tajawal';
+            color: #5D4037;
+        }
+
+        .reset-btn:hover {
+            background: #FFB86B;
+            transform: scale(1.02);
+        }
+
+        .question-card {
+            background: #FFFDF7;
+            border-radius: 55px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #A5D6A7;
+            text-align: center;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #1B5E20;
+            background: #F1F8E9;
+            padding: 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #6B3E00;
+            background: #FFF8E1;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .options-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: #E8F0E8;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Tajawal';
+            padding: 12px 8px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 3px 0 #B0C4A0;
+            color: #2C5E2C;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-2px);
+            background: #D4E4D0;
+        }
+
+        .option-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .option-btn.correct-answer {
+            background: #D4EDC9;
+            border: 2px solid #1B5E20;
+            box-shadow: 0 3px 0 #1B5E20;
+        }
+
+        .option-btn.wrong-answer {
+            background: #FFE0D4;
+            border: 2px solid #C62828;
+            box-shadow: 0 3px 0 #C62828;
+        }
+
+        .feedback-correct {
+            background: #D4EDC9;
+            color: #1E5E1E;
+            padding: 12px;
+            border-radius: 60px;
+            margin-top: 12px;
+            font-weight: bold;
+            animation: flashGreen 0.5s ease;
+        }
+
+        .feedback-wrong {
+            background: #FFE0D4;
+            color: #B13E3E;
+            padding: 12px;
+            border-radius: 60px;
+            margin-top: 12px;
+            font-weight: bold;
+            animation: flashRed 0.5s ease;
+        }
+
+        .next-btn {
+            background: #1B5E20;
+            color: white;
+            border: none;
+            font-size: 1.1rem;
+            padding: 12px 35px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            box-shadow: 0 4px 0 #0D5302;
+            width: 70%;
+        }
+
+        .next-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .next-btn:hover:not(:disabled) {
+            background: #2E7D32;
+            transform: translateY(-2px);
+        }
+
+        .final-result {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .player-stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 60px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .player-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #1B5E20;
+        }
+
+        .player-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1B5E20;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #5D4037;
+            font-weight: 700;
+        }
+
+        @keyframes flashGreen {
+            0% { background: #D4EDC9; }
+            50% { background: #A5D6A7; }
+            100% { background: #D4EDC9; }
+        }
+
+        @keyframes flashRed {
+            0% { background: #FFE0D4; }
+            50% { background: #FFCDD2; }
+            100% { background: #FFE0D4; }
+        }
+
+        @media (max-width: 600px) {
+            .question-text {
+                font-size: 1rem;
+                padding: 15px;
+            }
+            .options-area {
+                grid-template-columns: 1fr;
+            }
+            .option-btn {
+                font-size: 0.9rem;
+                padding: 8px 4px;
+            }
+            .hero-image-container {
+                width: 60px;
+                height: 60px;
+                left: 10px;
+            }
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        .celebrate {
+            animation: bounce 0.3s ease;
+        }
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); background: #FFFDE7; }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-image-container">
+        <img src="child.jpg" alt="صورة كنان" id="heroImage" onerror="this.style.display='none'; document.getElementById('heroImageContainer').style.display='none'">
+    </div>
+    <h1>📚 اختبار شامل 📚</h1>
+    <p>أَرْكَانُ الإِسْلَامِ - أَرْكَانُ الإِيمَانِ - الصَّلَاةُ - أَصَابِعُ الْيَدِ</p>
+    <div style="margin-top:5px;">
+        <button class="sound-indicator" onclick="testSound()"><i class="fas fa-volume-up"></i> اختبار الصوت</button>
+    </div>
+</div>
+
+<div class="quiz-container">
+    <div class="score-area">
+        <div class="score-box">⭐ <span id="scoreValue">0</span> / <span id="totalQuestions">15</span></div>
+        <div class="progress-text"><i class="fas fa-question-circle"></i> السُّؤَالُ: <span id="currentNumber">1</span> / 15</div>
+        <button class="reset-btn" id="resetQuizBtn"><i class="fas fa-sync-alt"></i> اختبار جديد</button>
+    </div>
+
+    <div class="player-stats">
+        <img src="child.jpg" alt="صورة كنان" class="player-avatar" id="playerAvatar" onerror="this.style.display='none'">
+        <span class="player-name">🌟 كِنَان البَطَل</span>
+        <span style="font-size:0.9rem; color:#888;">|</span>
+        <span style="font-size:0.9rem; color:#666;"><i class="fas fa-star" style="color:#FFD700;"></i> 15 سؤالاً</span>
+    </div>
+
+    <div id="questionsContainer"></div>
+    <div style="text-align:center;"><button class="next-btn" id="nextQuestionBtn">السُّؤَالُ التَّالِي 🌟</button></div>
+    <div id="finalResultArea"></div>
+</div>
+<footer>
+    💡 أَرْكَانُ الإِسْلَامِ (خَمْسَةٌ) - أَرْكَانُ الإِيمَانِ (سِتَّةٌ) - الصَّلَوَاتُ (خَمْسٌ) - الأَصَابِعُ (خَمْسَةٌ)
+</footer>
+
+<script>
+    // تسجيل الصوت للتغذية الراجعة
+    const soundFiles = {
+        correct: 'correctar.m4a',
+        wrong: 'wrongar.m4a',
+        victory: 'finish.mp3'
+    };
+
+    let victoryAudio = null;
+
+    function playSound(type) {
+        const file = soundFiles[type];
+        if (!file) {
+            console.log('ملف الصوت غير موجود:', type);
+            return;
+        }
+        try {
+            const audio = new Audio(file);
+            audio.play().catch(e => {
+                console.log('تعذر تشغيل الصوت:', e);
+            });
+        } catch (e) {
+            console.log('خطأ في تشغيل الصوت:', e);
+        }
+    }
+
+    function playVictoryMusic() {
+        const file = soundFiles.victory;
+        if (!file) {
+            console.log('ملف الفوز غير موجود');
+            return;
+        }
+        try {
+            if (victoryAudio) {
+                victoryAudio.pause();
+                victoryAudio.currentTime = 0;
+            }
+            victoryAudio = new Audio(file);
+            victoryAudio.loop = false;
+            victoryAudio.play().catch(e => {
+                console.log('تعذر تشغيل موسيقى الفوز:', e);
+            });
+        } catch (e) {
+            console.log('خطأ في تشغيل موسيقى الفوز:', e);
+        }
+    }
+
+    function stopVictoryMusic() {
+        if (victoryAudio) {
+            victoryAudio.pause();
+            victoryAudio.currentTime = 0;
+            victoryAudio = null;
+        }
+    }
+
+    function testSound() {
+        playSound('correct');
+        setTimeout(() => playSound('wrong'), 1200);
+        setTimeout(() => playVictoryMusic(), 2400);
+    }
+
+    // بنك الأسئلة - 15 سؤالاً
+    const questionsBank = [
+        // أركان الإسلام
+        { question: "كَمْ عَدَدُ أَرْكَانِ الإِسْلَامِ؟", correct: "خَمْسَةٌ", options: ["أَرْبَعَةٌ", "خَمْسَةٌ", "سِتَّةٌ", "سَبْعَةٌ"] },
+        { question: "مَا هُوَ الرُّكْنُ الأَوَّلُ مِنْ أَرْكَانِ الإِسْلَامِ؟", correct: "الشَّهَادَتَانِ", options: ["الشَّهَادَتَانِ", "الصَّلَاةُ", "الزَّكَاةُ", "الصَّوْمُ"] },
+        { question: "مَا هُوَ الرُّكْنُ الثَّانِي مِنْ أَرْكَانِ الإِسْلَامِ؟", correct: "إِقَامُ الصَّلَاةِ", options: ["الصَّوْمُ", "إِقَامُ الصَّلَاةِ", "الزَّكَاةُ", "حَجُّ الْبَيْتِ"] },
+        { question: "مَا هُوَ الرُّكْنُ الرَّابِعُ مِنْ أَرْكَانِ الإِسْلَامِ؟", correct: "صَوْمُ رَمَضَانَ", options: ["الزَّكَاةُ", "الصَّلَاةُ", "صَوْمُ رَمَضَانَ", "حَجُّ الْبَيْتِ"] },
+
+        // أركان الإيمان
+        { question: "كَمْ عَدَدُ أَرْكَانِ الإِيمَانِ؟", correct: "سِتَّةٌ", options: ["أَرْبَعَةٌ", "خَمْسَةٌ", "سِتَّةٌ", "سَبْعَةٌ"] },
+        { question: "مَا هُوَ الرُّكْنُ الأَوَّلُ مِنْ أَرْكَانِ الإِيمَانِ؟", correct: "الإِيمَانُ بِاللَّهِ", options: ["الإِيمَانُ بِاللَّهِ", "الإِيمَانُ بِالْمَلَائِكَةِ", "الإِيمَانُ بِالْكُتُبِ", "الإِيمَانُ بِالرُّسُلِ"] },
+        { question: "مَا هُوَ الرُّكْنُ الثَّانِي مِنْ أَرْكَانِ الإِيمَانِ؟", correct: "الإِيمَانُ بِالْمَلَائِكَةِ", options: ["الإِيمَانُ بِاللَّهِ", "الإِيمَانُ بِالْمَلَائِكَةِ", "الإِيمَانُ بِالْكُتُبِ", "الإِيمَانُ بِالْيَوْمِ الآخِرِ"] },
+        { question: "مَا هُوَ الرُّكْنُ السَّادِسُ مِنْ أَرْكَانِ الإِيمَانِ؟", correct: "الإِيمَانُ بِالْقَدَرِ", options: ["الإِيمَانُ بِاللَّهِ", "الإِيمَانُ بِالْيَوْمِ الآخِرِ", "الإِيمَانُ بِالْقَدَرِ", "الإِيمَانُ بِالرُّسُلِ"] },
+
+        // الصلاة - الأسماء وعدد الركعات
+        { question: "كَمْ عَدَدُ الصَّلَوَاتِ الْمَفْرُوضَةِ فِي الْيَوْمِ وَاللَّيْلَةِ؟", correct: "خَمْسُ صَلَوَاتٍ", options: ["ثَلَاثُ صَلَوَاتٍ", "أَرْبَعُ صَلَوَاتٍ", "خَمْسُ صَلَوَاتٍ", "سِتُّ صَلَوَاتٍ"] },
+        { question: "كَمْ رَكْعَةً فَرِيضَةُ صَلَاةِ الْفَجْرِ؟", correct: "رَكْعَتَانِ", options: ["رَكْعَتَانِ", "ثَلَاثُ رَكَعَاتٍ", "أَرْبَعُ رَكَعَاتٍ", "رَكْعَةٌ وَاحِدَةٌ"] },
+        { question: "كَمْ رَكْعَةً فَرِيضَةُ صَلَاةِ الظُّهْرِ؟", correct: "أَرْبَعُ رَكَعَاتٍ", options: ["رَكْعَتَانِ", "ثَلَاثُ رَكَعَاتٍ", "أَرْبَعُ رَكَعَاتٍ", "خَمْسُ رَكَعَاتٍ"] },
+        { question: "كَمْ رَكْعَةً فَرِيضَةُ صَلَاةِ الْمَغْرِبِ؟", correct: "ثَلَاثُ رَكَعَاتٍ", options: ["رَكْعَتَانِ", "ثَلَاثُ رَكَعَاتٍ", "أَرْبَعُ رَكَعَاتٍ", "رَكْعَةٌ وَاحِدَةٌ"] },
+
+        // أسماء أصابع اليد
+        { question: "مَا اسْمُ أَكْبَرِ أَصَابِعِ الْيَدِ؟", correct: "الإِبْهَامُ", options: ["الإِبْهَامُ", "السَّبَّابَةُ", "الْوُسْطَى", "الْخِنْصِرُ"] },
+        { question: "مَا اسْمُ الإِصْبَعِ الَّذِي نُشِيرُ بِهِ؟", correct: "السَّبَّابَةُ", options: ["الإِبْهَامُ", "السَّبَّابَةُ", "الْوُسْطَى", "الْبِنْصِرُ"] },
+        { question: "مَا اسْمُ أَصْغَرِ أَصَابِعِ الْيَدِ؟", correct: "الْخِنْصِرُ", options: ["الإِبْهَامُ", "السَّبَّابَةُ", "الْبِنْصِرُ", "الْخِنْصِرُ"] }
+    ];
+
+    let currentQuestions = [];
+    let userAnswers = [];
+    let currentIndex = 0;
+    let quizFinished = false;
+    let allCorrect = false;
+
+    const container = document.getElementById('questionsContainer');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const resetBtn = document.getElementById('resetQuizBtn');
+    const scoreSpan = document.getElementById('scoreValue');
+    const totalSpan = document.getElementById('totalQuestions');
+    const currentNumberSpan = document.getElementById('currentNumber');
+    const finalDiv = document.getElementById('finalResultArea');
+
+    function getRandomQuestions(arr, count = 15) {
+        let shuffled = [...arr];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled.slice(0, count);
+    }
+
+    function startQuiz() {
+        stopVictoryMusic();
+        currentQuestions = getRandomQuestions(questionsBank, 15);
+        userAnswers = new Array(currentQuestions.length);
+        currentIndex = 0;
+        quizFinished = false;
+        allCorrect = false;
+        nextBtn.disabled = false;
+        finalDiv.innerHTML = '';
+        renderCurrentQuestion();
+        updateStats();
+    }
+
+    function renderCurrentQuestion() {
+        if (currentIndex >= currentQuestions.length) {
+            if (!quizFinished) finishQuiz();
+            return;
+        }
+        const q = currentQuestions[currentIndex];
+        const saved = userAnswers[currentIndex];
+
+        let html = `
+            <div class="question-card" id="qCard">
+                <div class="question-text">📖 ${q.question}</div>
+                <div class="question-prompt">🔍 اخْتَرِ الإِجَابَةَ الصَّحِيحَةَ:</div>
+                <div class="options-area" id="optsArea">
+        `;
+        // خلط الخيارات
+        let shuffledOptions = [...q.options];
+        for (let i = shuffledOptions.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+        }
+        shuffledOptions.forEach(opt => {
+            html += `<button class="option-btn" data-opt="${opt}">${opt}</button>`;
+        });
+        html += `</div><div id="fbMsg" class="feedback-message"></div></div>`;
+        container.innerHTML = html;
+        currentNumberSpan.innerText = currentIndex + 1;
+
+        const btns = document.querySelectorAll('.option-btn');
+        const fbDiv = document.getElementById('fbMsg');
+
+        if (saved) {
+            const correctAnswer = saved.correctAnswer;
+            btns.forEach(btn => {
+                btn.disabled = true;
+                const opt = btn.getAttribute('data-opt');
+                if (opt === correctAnswer) {
+                    btn.classList.add('correct-answer');
+                } else if (opt === saved.selected && !saved.isCorrect) {
+                    btn.classList.add('wrong-answer');
+                }
+            });
+            if (saved.isCorrect) {
+                fbDiv.innerHTML = `<div class="feedback-correct">✅ صَحِيحٌ! الإِجَابَةُ: ${correctAnswer}</div>`;
+            } else {
+                fbDiv.innerHTML = `<div class="feedback-wrong">❌ الإِجَابَةُ الصَّحِيحَةُ: ${correctAnswer}</div>`;
+            }
+            nextBtn.disabled = false;
+        } else {
+            btns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (quizFinished) return;
+                    const selected = this.getAttribute('data-opt');
+                    const isCorrect = (selected === q.correct);
+                    userAnswers[currentIndex] = { isCorrect, selected, correctAnswer: q.correct };
+
+                    // تشغيل الصوت
+                    if (isCorrect) {
+                        playSound('correct');
+                        fbDiv.innerHTML = `<div class="feedback-correct">✅ أَحْسَنْتَ يَا كِنَان! ${q.correct}</div>`;
+                        document.getElementById('qCard')?.classList.add('celebrate');
+                        setTimeout(() => document.getElementById('qCard')?.classList.remove('celebrate'), 400);
+                    } else {
+                        playSound('wrong');
+                        fbDiv.innerHTML = `<div class="feedback-wrong">❌ لَيْسَ صَحِيحًا. الإِجَابَةُ الصَّحِيحَةُ: ${q.correct}</div>`;
+                    }
+
+                    btns.forEach(b => {
+                        b.disabled = true;
+                        const opt = b.getAttribute('data-opt');
+                        if (opt === q.correct) {
+                            b.classList.add('correct-answer');
+                        } else if (opt === selected && !isCorrect) {
+                            b.classList.add('wrong-answer');
+                        }
+                    });
+
+                    nextBtn.disabled = false;
+                    updateStats();
+                });
+            });
+        }
+    }
+
+    function updateStats() {
+        let correct = userAnswers.filter(a => a && a.isCorrect === true).length;
+        scoreSpan.innerText = correct;
+        totalSpan.innerText = currentQuestions.length;
+    }
+
+    function finishQuiz() {
+        quizFinished = true;
+        const total = currentQuestions.length;
+        const correct = userAnswers.filter(a => a && a.isCorrect === true).length;
+        const percent = (correct / total) * 100;
+
+        // التحقق مما إذا كانت جميع الإجابات صحيحة
+        allCorrect = (correct === total);
+
+        let msg = "";
+        let bgColor = "";
+        if (allCorrect) {
+            msg = "🏆 مُمْتَازٌ يَا كِنَان! أَجَبْتَ عَنْ جَمِيعِ الْأَسْئِلَةِ بِشَكْلٍ صَحِيحٍ! أَنْتَ بَطَلٌ حَقًّا!";
+            bgColor = "#C8E6C9";
+            playVictoryMusic(); // تشغيل موسيقى النصر
+        } else if (percent >= 85) {
+            msg = "🌟 مُمْتَازٌ! أَتْقَنْتَ الْمَوَاضِيعَ بِمَهَارَةٍ عَالِيَةٍ!";
+            bgColor = "#C8E6C9";
+            playSound('correct');
+        } else if (percent >= 65) {
+            msg = "📚 جَيِّدٌ جِدًّا! رَاجِعْ بَعْضَ الْمَوَاضِيعِ لِتُصْبِحَ خَبِيرًا.";
+            bgColor = "#FFF9C4";
+            playSound('correct');
+        } else if (percent >= 45) {
+            msg = "📖 جَيِّدٌ! كُرِّرْ النَّظَرَ فِي أَرْكَانِ الإِسْلَامِ وَالإِيمَانِ وَالصَّلَاةِ.";
+            bgColor = "#FFE0B2";
+            playSound('wrong');
+        } else {
+            msg = "💪 لَا تَقْلَقْ يَا كِنَان! تَدَرَّبْ مَرَّةً أُخْرَى وَسَتَتَمَكَّنُ بِإِذْنِ اللَّهِ.";
+            bgColor = "#FFCDD2";
+            playSound('wrong');
+        }
+        finalDiv.innerHTML = `
+            <div class="final-result" style="background:${bgColor};">
+                ⭐ ${msg} ⭐<br>
+                نَتَيْجَتُكَ: ${correct} مِنْ ${total}<br>
+                ✨ تَذَكَّرْ: أَرْكَانُ الإِسْلَامِ (خَمْسَةٌ) - أَرْكَانُ الإِيمَانِ (سِتَّةٌ) - الصَّلَوَاتُ (خَمْسٌ) - الأَصَابِعُ (خَمْسَةٌ) ✨
+            </div>
+        `;
+        nextBtn.disabled = true;
+    }
+
+    function nextQuestion() {
+        if (quizFinished) return;
+        if (currentIndex < currentQuestions.length - 1) {
+            if (!userAnswers[currentIndex]) {
+                let fbDiv = document.querySelector('.feedback-message');
+                if (fbDiv) fbDiv.innerHTML = `<span style="color:#c0392b;">⚠️ اخْتَرِ الإِجَابَةَ الصَّحِيحَةَ أَوَّلًا ⚠️</span>`;
+                return;
+            }
+            currentIndex++;
+            renderCurrentQuestion();
+        } else {
+            if (!userAnswers[currentIndex]) {
+                let fbDiv = document.querySelector('.feedback-message');
+                if (fbDiv) fbDiv.innerHTML = `<span style="color:#c0392b;">⚠️ أَجِبْ عَنِ السُّؤَالِ قَبْلَ الاِنْتِهَاءِ ⚠️</span>`;
+                return;
+            }
+            if (!quizFinished) finishQuiz();
+        }
+    }
+
+    function resetQuiz() {
+        startQuiz();
+    }
+
+    // بدء الاختبار
+    startQuiz();
+
+    // زر إعادة التعيين
+    resetBtn.addEventListener('click', resetQuiz);
+
+    // زر السؤال التالي
+    nextBtn.addEventListener('click', nextQuestion);
+</script>
+</body>
+</html>
